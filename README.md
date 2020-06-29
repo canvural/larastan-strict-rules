@@ -2,7 +2,7 @@
 
 Extra strict and opinionated PHPStan rules for Laravel.
 
-![Tests](https://github.com/canvural/larastan-strict-rules/workflows/Tests/badge.svg)
+[![Tests](https://github.com/canvural/larastan-strict-rules/workflows/Tests/badge.svg)](https://github.com/canvural/larastan-strict-rules/actions)
 [![codecov](https://codecov.io/gh/canvural/larastan-strict-rules/branch/master/graph/badge.svg)](https://codecov.io/gh/canvural/larastan-strict-rules)
 [![PHPStan](https://img.shields.io/badge/PHPStan-Level%20Max-brightgreen.svg?style=flat&logo=php)](https://phpstan.org)
 
