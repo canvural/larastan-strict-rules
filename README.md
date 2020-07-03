@@ -67,6 +67,14 @@ This rule disallows validating the request in controllers.
 
 This rule makes sure `Illuminate\Database\Eloquent\Builder` instance is returned from `Eloquent` local query scopes.
 
+#### `NoLocalQueryScopeRule`
+
+This rule disallows the usage of local model query scopes all together.
+
+#### `NoPropertyAccessorRule`
+
+This rule disallows the usage of model property accessors.
+
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
