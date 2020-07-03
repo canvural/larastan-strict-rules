@@ -6,7 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
-## 0.1.1 - 2020-06-20
+## [0.1.2] - 2020-07-03
+
+### Added
+- Introduced `NoPropertyAccessorRule` to disallow defining and using property accessors in models.
+
+## [0.1.1] - 2020-06-20
 
 ### Added
 - New rule to disallow Eloquent local query scopes.
@@ -15,5 +20,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 Initial release
 
-[Unreleased]: https://github.com/nunomaduro/larastan/compare/v0.1.1...HEAD
-[0.1.1]: https://github.com/nunomaduro/larastan/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/canvural/larastan-strict-rules/compare/v0.1.2...HEAD
+[0.1.2]: https://github.com/canvural/larastan-strict-rules/compare/v0.1.1...v0.1.2
+[0.1.1]: https://github.com/canvural/larastan-strict-rules/compare/v0.1.0...HEAD
