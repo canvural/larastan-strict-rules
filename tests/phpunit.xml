@@ -1,26 +1,26 @@
+<?xml version="1.0"?>
 <phpunit
-        bootstrap="bootstrap.php"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="../vendor/phpunit/phpunit/phpunit.xsd"
-        beStrictAboutChangesToGlobalState="true"
-        beStrictAboutCoversAnnotation="true"
-        beStrictAboutOutputDuringTests="true"
-        beStrictAboutResourceUsageDuringSmallTests="true"
-        beStrictAboutTodoAnnotatedTests="true"
-        cacheResultFile="../.build/phpunit.cache"
-        colors="true"
-        columns="max"
-        executionOrder="random"
-        verbose="true"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  bootstrap="bootstrap.php"
+  xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
+  beStrictAboutChangesToGlobalState="true"
+  beStrictAboutCoversAnnotation="true"
+  beStrictAboutOutputDuringTests="true"
+  beStrictAboutResourceUsageDuringSmallTests="true"
+  beStrictAboutTodoAnnotatedTests="true"
+  cacheResultFile="../.build/phpunit.cache"
+  colors="true" columns="max"
+  executionOrder="random"
+  verbose="true"
 >
-    <testsuites>
-        <testsuite name="Rule tests">
-            <directory>./Rules</directory>
-        </testsuite>
-    </testsuites>
-    <filter>
-        <whitelist>
-            <directory suffix=".php">../src</directory>
-        </whitelist>
-    </filter>
+  <coverage>
+    <include>
+      <directory suffix=".php">../src</directory>
+    </include>
+  </coverage>
+  <testsuites>
+    <testsuite name="Rule tests">
+      <directory>./Rules</directory>
+    </testsuite>
+  </testsuites>
 </phpunit>
