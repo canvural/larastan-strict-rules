@@ -13,6 +13,7 @@ use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
 
+use function in_array;
 use function sprintf;
 use function stripos;
 
@@ -24,9 +25,16 @@ final class NoGlobalLaravelFunctionRule implements Rule
     /** @var ReflectionProvider  */
     private $provider;
 
-    public function __construct(ReflectionProvider $provider)
+    /** @var string[] */
+    private $allowedFunctions;
+
+    /**
+     * @param string[] $allowedFunctions
+     */
+    public function __construct(ReflectionProvider $provider, array $allowedFunctions)
     {
-        $this->provider = $provider;
+        $this->provider         = $provider;
+        $this->allowedFunctions = $allowedFunctions;
     }
 
     public function getNodeType(): string
@@ -61,6 +69,10 @@ final class NoGlobalLaravelFunctionRule implements Rule
             stripos($fileName, 'illuminate/support/helpers.php') !== false ||
             stripos($fileName, 'illuminate/foundation/helpers.php') !== false
         ) {
+            if (in_array($functionReflection->getName(), $this->allowedFunctions, true)) {
+                return [];
+            }
+
             return [
                 RuleErrorBuilder::message(sprintf(
                     "Global helper function '%s' should not be used.",

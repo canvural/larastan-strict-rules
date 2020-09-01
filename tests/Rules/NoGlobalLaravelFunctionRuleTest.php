@@ -18,7 +18,7 @@ class NoGlobalLaravelFunctionRuleTest extends RuleTestCase
      */
     protected function getRule(): Rule
     {
-        return new NoGlobalLaravelFunctionRule($this->createReflectionProvider());
+        return new NoGlobalLaravelFunctionRule($this->createReflectionProvider(), ['app']);
     }
 
     /**
@@ -38,7 +38,7 @@ class NoGlobalLaravelFunctionRuleTest extends RuleTestCase
             ],
             [
                 "Global helper function 'base_path' should not be used.",
-                15,
+                17,
             ],
         ]);
     }

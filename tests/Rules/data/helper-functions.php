@@ -12,4 +12,6 @@ if (random_int(0, 1)) {
     return value([]);
 }
 
+$app = app();
+
 return base_path();
