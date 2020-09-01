@@ -59,6 +59,16 @@ This rule disallows the usage of Laravel Facades. Also, checks for the real time
 
 This rule disallows the usage of global helper functions that comes with Laravel.
 
+If you want to allow some functions, you can use the `allowedFunctions` parameter for this rule. Like so:
+```neon
+-
+    class: Vural\LarastanStrictRules\Rules\NoGlobalLaravelFunctionRule
+    arguments:
+        allowedFunctions:
+            - app
+            - event
+```
+
 #### `NoValidationInControllerRule`
 
 This rule disallows validating the request in controllers.

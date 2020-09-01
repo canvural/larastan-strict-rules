@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [0.1.3] - 2020-09-01
+
+### Added
+- Added ability to define allowed global functions for the `NoGlobalLaravelFunctionRule` rule.
+
+### Changed
+- Requires PHP 7.3 as minimum version.
+
 ## [0.1.2] - 2020-07-03
 
 ### Added
@@ -20,6 +28,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 Initial release
 
-[Unreleased]: https://github.com/canvural/larastan-strict-rules/compare/v0.1.2...HEAD
+[Unreleased]: https://github.com/canvural/larastan-strict-rules/compare/v0.1.3...HEAD
+[0.1.3]: https://github.com/canvural/larastan-strict-rules/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/canvural/larastan-strict-rules/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/canvural/larastan-strict-rules/compare/v0.1.0...HEAD
