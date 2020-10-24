@@ -27,5 +27,3 @@ services:
         class: Vural\LarastanStrictRules\Rules\ScopeShouldReturnQueryBuilderRule
         tags:
             - phpstan.rules.rule
-    -
-        class: NunoMaduro\Larastan\Methods\BuilderHelper
