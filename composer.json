@@ -7,7 +7,7 @@
   ],
   "require": {
     "php": "^7.3",
-    "nunomaduro/larastan": "^0.6.1",
+    "nunomaduro/larastan": "^0.6.8",
     "phpstan/phpstan": "^0.12"
   },
   "require-dev": {

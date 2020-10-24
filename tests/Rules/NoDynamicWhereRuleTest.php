@@ -19,7 +19,7 @@ class NoDynamicWhereRuleTest extends RuleTestCase
      */
     protected function getRule(): Rule
     {
-        return new NoDynamicWhereRule($this->createReflectionProvider(), new BuilderHelper($this->createBroker()));
+        return new NoDynamicWhereRule($this->createReflectionProvider(), new BuilderHelper($this->createReflectionProvider(), false));
     }
 
     /**
