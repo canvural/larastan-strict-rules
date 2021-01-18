@@ -13,7 +13,7 @@
   "require-dev": {
     "doctrine/coding-standard": "^8.2",
     "phpstan/phpstan-phpunit": "^0.12",
-    "phpunit/phpunit": "^9.3",
+    "phpunit/phpunit": "^9.5",
     "orchestra/testbench" : "^5.3",
     "roave/security-advisories": "dev-master"
   },
