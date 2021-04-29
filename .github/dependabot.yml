@@ -4,9 +4,20 @@ updates:
   directory: "/"
   schedule:
     interval: daily
+    time: "04:00"
   open-pull-requests-limit: 10
-- package-ecosystem: github-actions
-  directory: "/"
-  schedule:
-    interval: daily
-  open-pull-requests-limit: 10
+  reviewers:
+  - canvural
+  assignees:
+  - canvural
+  versioning-strategy: increase
+  ignore:
+  - dependency-name: orchestra/testbench
+    versions:
+    - ">= 6.a, < 7"
+  - dependency-name: nunomaduro/larastan
+    versions:
+    - 0.7.2
+  - dependency-name: orchestra/testbench
+    versions:
+    - 5.18.0
