@@ -67,6 +67,7 @@ final class NoGlobalLaravelFunctionRule implements Rule
 
         if (
             stripos($fileName, 'illuminate/support/helpers.php') !== false ||
+            stripos($fileName, 'illuminate/collections/helpers.php') !== false ||
             stripos($fileName, 'illuminate/foundation/helpers.php') !== false
         ) {
             if (in_array($functionReflection->getName(), $this->allowedFunctions, true)) {
