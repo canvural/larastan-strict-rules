@@ -1,4 +1,4 @@
-## larastan-strict-rules
+## Larastan Strict Rules
 
 Extra strict and opinionated PHPStan rules for Laravel.
 
@@ -21,7 +21,7 @@ If you also install [phpstan/extension-installer](https://github.com/phpstan/ext
 
 If you don't want to use `phpstan/extension-installer`, include rules.neon in your project's PHPStan config:
 
-```
+```yaml
 includes:
     - vendor/canvural/larastan-strict-rules/rules.neon
 ```
@@ -31,7 +31,7 @@ includes:
 ## Enabling rules one-by-one
 If you don't want to start using all the available strict rules at once but only one or two, you can! Just don't include the whole `rules.neon` from this package in your configuration, but look at its contents and copy only the rules you want to your configuration under the `services` key. For example:
 
-```
+```yaml
 services:
     -
         class: Vural\LarastanStrictRules\Rules\NoDynamicWhereRule
@@ -43,21 +43,21 @@ services:
             - phpstan.rules.rule
 ```
 
-*Unfortunately, you cannot use phpstan/extension-installer in this case.*
+*Unfortunately, you cannot use `phpstan/extension-installer` in this case.*
 
 ## Rules
 
 #### `NoDynamicWhereRule`
 
-This rule disallows the usage of dynamic where methods on Eloquent query builder.
+Disallow the usage of dynamic where methods on Eloquent query builder.
 
 #### `NoFacadeRule`
 
-This rule disallows the usage of Laravel Facades. Also, checks for the real time facade usage.
+Disallow the usage of Laravel Facades. Also, checks for the real time facade usage.
 
 #### `NoGlobalLaravelFunctionRule`
 
-This rule disallows the usage of global helper functions that comes with Laravel.
+Disallow the usage of global helper functions that comes with Laravel.
 
 If you want to allow some functions, you can use the `allowedFunctions` parameter for this rule. Like so:
 ```neon
@@ -71,11 +71,11 @@ If you want to allow some functions, you can use the `allowedFunctions` paramete
 
 #### `NoValidationInControllerRule`
 
-This rule disallows validating the request in controllers.
+Disallow validating the request in controllers.
 
 #### `ScopeShouldReturnQueryBuilderRule`
 
-This rule makes sure `Illuminate\Database\Eloquent\Builder` instance is returned from `Eloquent` local query scopes.
+Make sure `Illuminate\Database\Eloquent\Builder` instance is returned from `Eloquent` local query scopes.
 
 #### `NoLocalQueryScopeRule`
 
@@ -96,10 +96,10 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 ## Credits
 
 People:
+
 - [Can Vural](https://github.com/canvural)
-- [All Contributors](../../contributors)
+- [All Contributors](https://github.com/canvural/larastan-strict-rules/graphs/contributors)
 
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
-
