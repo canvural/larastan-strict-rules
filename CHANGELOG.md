@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [1.0.0] - 2021-11-02
+
+### Fixed
+- PHPStan and Larastan 1.0 compatibility.
+
 ## [0.1.7] - 2021-06-29
 
 ### Changed
@@ -44,7 +49,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 Initial release
 
-[Unreleased]: https://github.com/canvural/larastan-strict-rules/compare/v0.1.7...HEAD
+[Unreleased]: https://github.com/canvural/larastan-strict-rules/compare/1.0.0...HEAD
+[1.0.0]: https://github.com/canvural/larastan-strict-rules/compare/v0.1.7...1.0.0
 [0.1.7]: https://github.com/canvural/larastan-strict-rules/compare/v0.1.4...v0.1.7
 [0.1.4]: https://github.com/canvural/larastan-strict-rules/compare/v0.1.3...v0.1.4
 [0.1.3]: https://github.com/canvural/larastan-strict-rules/compare/v0.1.2...v0.1.3
