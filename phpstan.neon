@@ -1,3 +1,6 @@
+includes:
+    - phpstan-baseline.neon
+
 parameters:
     inferPrivatePropertyTypeFromConstructor: true
     tmpDir: .build/phpstan/
@@ -5,5 +8,5 @@ parameters:
         - src
         - tests
     level: max
-    excludes_analyse:
+    excludePaths:
         - tests/*/data/*

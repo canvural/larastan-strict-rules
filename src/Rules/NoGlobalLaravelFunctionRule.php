@@ -61,7 +61,7 @@ final class NoGlobalLaravelFunctionRule implements Rule
 
         $fileName = $functionReflection->getFileName();
 
-        if ($fileName === false) {
+        if ($fileName === null) {
             return [];
         }
 
