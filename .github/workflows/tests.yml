@@ -9,12 +9,6 @@ on:
   schedule:
     - cron: "0 0 * * *"
 
-env:
-  MIN_COVERED_MSI: 88
-  MIN_MSI: 86
-  REQUIRED_PHP_EXTENSIONS: "json"
-  INFECTION_BADGE_API_KEY: ${{ secrets.INFECTION_BADGE_API_KEY }}
-
 jobs:
   coding-standards:
     name: "Coding Standards"
@@ -23,7 +17,7 @@ jobs:
 
     strategy:
       matrix:
-        php: [7.3]
+        php: [8.0]
         dependencies: [locked]
 
     steps:
@@ -73,7 +67,7 @@ jobs:
 
     strategy:
       matrix:
-        php: [7.3]
+        php: [8.0]
 
         dependencies: [locked]
 
@@ -131,7 +125,7 @@ jobs:
 
     strategy:
       matrix:
-        php: [7.3, 7.4, 8.0]
+        php: [8.0, 8.1]
 
         dependencies:
           - "lowest"
@@ -182,7 +176,7 @@ jobs:
 
     strategy:
       matrix:
-        php: [7.4]
+        php: [8.0]
 
         dependencies:
           - "locked"
