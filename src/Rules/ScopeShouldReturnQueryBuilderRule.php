@@ -18,15 +18,14 @@ use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\ObjectType;
 
 use function count;
-use function strpos;
+use function str_starts_with;
 
 /**
  * @implements Rule<InClassMethodNode>
  */
 final class ScopeShouldReturnQueryBuilderRule implements Rule
 {
-    /** @var ReflectionProvider */
-    private $provider;
+    private ReflectionProvider $provider;
 
     public function __construct(ReflectionProvider $provider)
     {
@@ -51,7 +50,7 @@ final class ScopeShouldReturnQueryBuilderRule implements Rule
 
         $originalNode = $node->getOriginalNode();
 
-        if ($originalNode->stmts === null || strpos($originalNode->name->name, 'scope') !== 0) {
+        if ($originalNode->stmts === null || ! str_starts_with($originalNode->name->name, 'scope')) {
             return [];
         }
 
@@ -92,7 +91,7 @@ final class ScopeShouldReturnQueryBuilderRule implements Rule
             return [RuleErrorBuilder::message('Query scope should return query builder instance.')->build()];
         }
 
-        if (! $this->provider->getClass($returnType->getClassName())->isSubclassOf(Builder::class)) {
+        if ($returnType->getClassName() !== Builder::class && ! $this->provider->getClass($returnType->getClassName())->isSubclassOf(Builder::class)) {
             return [RuleErrorBuilder::message('Query scope should return query builder instance.')->build()];
         }
 

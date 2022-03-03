@@ -43,4 +43,9 @@ class Foo extends Model
     {
         return true;
     }
+
+    public function scopeCorrect(Builder $query): Builder
+    {
+        return $query->where('foo', 'bar');
+    }
 }
