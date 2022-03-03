@@ -14,18 +14,12 @@ You can install the package via composer:
 composer require --dev canvural/larastan-strict-rules
 ```
 
-If you also install [phpstan/extension-installer](https://github.com/phpstan/extension-installer) then you're all set!
-
-<details>
-  <summary>Manual installation</summary>
-
-If you don't want to use `phpstan/extension-installer`, include rules.neon in your project's PHPStan config:
+To enable all the rules, include `rules.neon` in your project's PHPStan config:
 
 ```
 includes:
     - vendor/canvural/larastan-strict-rules/rules.neon
 ```
-</details>
 
 
 ## Enabling rules one-by-one
@@ -42,8 +36,6 @@ services:
         tags:
             - phpstan.rules.rule
 ```
-
-*Unfortunately, you cannot use phpstan/extension-installer in this case.*
 
 ## Rules
 
