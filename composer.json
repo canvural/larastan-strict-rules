@@ -8,7 +8,7 @@
   "require": {
     "php": "^8.0",
     "nunomaduro/larastan": "^2.1",
-    "phpstan/phpstan": "^1.4.8"
+    "phpstan/phpstan": "^1.4.9"
   },
   "require-dev": {
     "doctrine/coding-standard": "^9.0",
