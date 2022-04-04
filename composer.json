@@ -14,7 +14,7 @@
     "doctrine/coding-standard": "^9.0",
     "phpstan/phpstan-phpunit": "^1.0",
     "phpunit/phpunit": "^9.5",
-    "orchestra/testbench" : "^7.1.0",
+    "orchestra/testbench" : "^7.3.0",
     "roave/security-advisories": "dev-latest"
   },
   "config": {
