@@ -4,12 +4,9 @@ declare(strict_types=1);
 
 namespace FacadeTests;
 
-use Event;
+use RateLimiter;
 use Illuminate\Support\Facades\Queue;
-use Facades\App\User;
 
 Queue::pop();
 
-Event::assertDispatched();
-
-User::doFoo();
+RateLimiter::for('foo', function () {});

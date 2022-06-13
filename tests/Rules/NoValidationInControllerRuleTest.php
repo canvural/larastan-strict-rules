@@ -26,15 +26,11 @@ class NoValidationInControllerRuleTest extends RuleTestCase
         $this->analyse([__DIR__ . '/data/validation.php'], [
             [
                 'Request validation should be done in FormRequest not in Controller.',
-                14,
-            ],
-            [
-                'Request validation should be done in FormRequest not in Controller.',
                 15,
             ],
             [
                 'Request validation should be done in FormRequest not in Controller.',
-                20,
+                16,
             ],
             [
                 'Request validation should be done in FormRequest not in Controller.',
@@ -42,12 +38,24 @@ class NoValidationInControllerRuleTest extends RuleTestCase
             ],
             [
                 'Request validation should be done in FormRequest not in Controller.',
-                26,
+                22,
             ],
             [
                 'Request validation should be done in FormRequest not in Controller.',
                 27,
             ],
+            [
+                'Request validation should be done in FormRequest not in Controller.',
+                28,
+            ],
         ]);
+    }
+
+    /**
+     * @return string[]
+     */
+    public static function getAdditionalConfigFiles(): array
+    {
+        return [__DIR__ . '/extension.neon'];
     }
 }

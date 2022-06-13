@@ -4,6 +4,7 @@ namespace Validation;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use function request;
 
 class FooController extends Controller
 {

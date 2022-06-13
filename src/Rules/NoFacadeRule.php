@@ -13,21 +13,18 @@ use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
+use PHPStan\ShouldNotHappenException;
 
 use function sprintf;
-use function strpos;
+use function str_starts_with;
 
 /**
  * @implements Rule<StaticCall>
  */
 final class NoFacadeRule implements Rule
 {
-    /** @var ReflectionProvider  */
-    private $provider;
-
-    public function __construct(ReflectionProvider $provider)
+    public function __construct(private ReflectionProvider $provider)
     {
-        $this->provider = $provider;
     }
 
     public function getNodeType(): string
@@ -39,6 +36,8 @@ final class NoFacadeRule implements Rule
      * @param StaticCall $node
      *
      * @return RuleError[]
+     *
+     * @throws ShouldNotHappenException
      */
     public function processNode(Node $node, Scope $scope): array
     {
@@ -60,7 +59,7 @@ final class NoFacadeRule implements Rule
                 ];
             }
         } catch (ClassNotFoundException $e) {
-            if (strpos($className, 'Facades\\') === 0) {
+            if (str_starts_with($className, 'Facades\\')) {
                 return [
                     RuleErrorBuilder::message(sprintf(
                         '%s facade should not be used.',

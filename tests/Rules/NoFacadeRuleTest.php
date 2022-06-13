@@ -26,16 +26,20 @@ class NoFacadeRuleTest extends RuleTestCase
         $this->analyse([__DIR__ . '/data/facades.php'], [
             [
                 'Illuminate\Support\Facades\Queue facade should not be used.',
-                11,
+                10,
             ],
             [
-                'Event facade should not be used.',
-                13,
-            ],
-            [
-                'Facades\App\User facade should not be used.',
-                15,
+                'RateLimiter facade should not be used.',
+                12,
             ],
         ]);
+    }
+
+    /**
+     * @return string[]
+     */
+    public static function getAdditionalConfigFiles(): array
+    {
+        return [__DIR__ . '/facadeAlias.neon'];
     }
 }
