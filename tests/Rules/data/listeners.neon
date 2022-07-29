@@ -1,0 +1,9 @@
+includes:
+    - ../../../vendor/nunomaduro/larastan/extension.neon
+
+parameters:
+    listenerPaths:
+        - ./Listeners
+
+parametersSchema:
+    listenerPaths: listOf(string())

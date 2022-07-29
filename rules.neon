@@ -1,8 +1,10 @@
 parameters:
     allowedGlobalFunctions: []
+    listenerPaths: []
 
 parametersSchema:
     allowedGlobalFunctions: listOf(string())
+    listenerPaths: listOf(string())
 
 services:
     -
@@ -25,5 +27,12 @@ services:
             - phpstan.rules.rule
     -
         class: Vural\LarastanStrictRules\Rules\ScopeShouldReturnQueryBuilderRule
+        tags:
+            - phpstan.rules.rule
+
+    -
+        class: Vural\LarastanStrictRules\Rules\ListenerShouldHaveVoidReturnTypeRule
+        arguments:
+            listenerPaths: %listenerPaths%
         tags:
             - phpstan.rules.rule
