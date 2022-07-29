@@ -77,6 +77,22 @@ This rule disallows the usage of local model query scopes all together.
 
 This rule disallows the usage of model property accessors.
 
+#### `ListenerShouldHaveVoidReturnTypeRule`
+
+This rule makes sure your event listeners have a void return type. 
+
+If you return `false` from an event listener, Laravel will stop the propagation of an event to other listeners. Sometimes this can be useful. But other time it can cause bugs that you will need to debug for hours. So this opinionated rule makes sure you always have `void` return type for your event listeners.
+
+You need to configure this rule by adding the directories that your event listeners are in to the `listenerPaths` parameter:
+```neon
+-
+    class: Vural\LarastanStrictRules\Rules\ListenerShouldHaveVoidReturnTypeRule
+    arguments:
+        listenerPaths:
+            - app/Listeners
+            - app/DomainA/Listeners
+```
+
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
