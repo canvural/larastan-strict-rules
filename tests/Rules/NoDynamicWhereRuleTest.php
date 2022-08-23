@@ -35,19 +35,19 @@ class NoDynamicWhereRuleTest extends RuleTestCase
         $this->analyse([__DIR__ . '/data/dynamic-where.php'], [
             [
                 "Dynamic where method 'whereBar' should not be used.",
-                20,
+                21,
             ],
             [
                 "Dynamic where method 'whereBar' should not be used.",
-                31,
+                32,
             ],
             [
                 "Dynamic where method 'whereBar' should not be used.",
-                33,
+                34,
             ],
             [
                 "Dynamic where method 'whereBaz' should not be used.",
-                50,
+                51,
             ],
         ]);
     }
