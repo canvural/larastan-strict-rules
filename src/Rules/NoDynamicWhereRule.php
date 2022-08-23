@@ -6,6 +6,7 @@ namespace Vural\LarastanStrictRules\Rules;
 
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 use NunoMaduro\Larastan\Methods\BuilderHelper;
 use PhpParser\Node;
@@ -103,7 +104,8 @@ final class NoDynamicWhereRule implements Rule
         if (
             $this->provider->getClass(Model::class)->hasNativeMethod($methodName) ||
             $this->provider->getClass($eloquentBuilder)->hasNativeMethod($methodName) ||
-            $this->provider->getClass(QueryBuilder::class)->hasNativeMethod($methodName)
+            $this->provider->getClass(QueryBuilder::class)->hasNativeMethod($methodName) ||
+            $this->provider->getClass(BelongsToMany::class)->hasNativeMethod($methodName)
         ) {
             return [];
         }
