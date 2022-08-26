@@ -20,16 +20,11 @@ use PHPStan\Type\ObjectType;
 use function count;
 use function str_starts_with;
 
-/**
- * @implements Rule<InClassMethodNode>
- */
+/** @implements Rule<InClassMethodNode> */
 final class ScopeShouldReturnQueryBuilderRule implements Rule
 {
-    private ReflectionProvider $provider;
-
-    public function __construct(ReflectionProvider $provider)
+    public function __construct(private ReflectionProvider $provider)
     {
-        $this->provider = $provider;
     }
 
     public function getNodeType(): string

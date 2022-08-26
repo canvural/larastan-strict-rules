@@ -8,14 +8,10 @@ use PhpParser\Node\Expr\StaticCall;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 
-/**
- * @extends RuleTestCase<NoFacadeRule>
- */
+/** @extends RuleTestCase<NoFacadeRule> */
 class NoFacadeRuleTest extends RuleTestCase
 {
-    /**
-     * @return Rule<StaticCall>
-     */
+    /** @return Rule<StaticCall> */
     protected function getRule(): Rule
     {
         return new NoFacadeRule($this->createReflectionProvider());
@@ -35,9 +31,7 @@ class NoFacadeRuleTest extends RuleTestCase
         ]);
     }
 
-    /**
-     * @return string[]
-     */
+    /** @return string[] */
     public static function getAdditionalConfigFiles(): array
     {
         return [__DIR__ . '/facadeAlias.neon'];

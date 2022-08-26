@@ -8,22 +8,16 @@ use PhpParser\Node\Expr\FuncCall;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 
-/**
- * @extends RuleTestCase<NoGlobalLaravelFunctionRule>
- */
+/** @extends RuleTestCase<NoGlobalLaravelFunctionRule> */
 class NoGlobalLaravelFunctionRuleTest extends RuleTestCase
 {
-    /**
-     * @return Rule<FuncCall>
-     */
+    /** @return Rule<FuncCall> */
     protected function getRule(): Rule
     {
         return new NoGlobalLaravelFunctionRule($this->createReflectionProvider(), ['app']);
     }
 
-    /**
-     * @return string[]
-     */
+    /** @return string[] */
     public static function getAdditionalConfigFiles(): array
     {
         return [__DIR__ . '/extension.neon'];

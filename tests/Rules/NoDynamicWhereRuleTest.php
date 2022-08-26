@@ -9,22 +9,16 @@ use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 
-/**
- * @extends RuleTestCase<NoDynamicWhereRule>
- */
+/** @extends RuleTestCase<NoDynamicWhereRule> */
 class NoDynamicWhereRuleTest extends RuleTestCase
 {
-    /**
-     * @return Rule<MethodCall>
-     */
+    /** @return Rule<MethodCall> */
     protected function getRule(): Rule
     {
         return new NoDynamicWhereRule($this->createReflectionProvider(), new BuilderHelper($this->createReflectionProvider(), false));
     }
 
-    /**
-     * @return string[]
-     */
+    /** @return string[] */
     public static function getAdditionalConfigFiles(): array
     {
         return [__DIR__ . '/extension.neon'];

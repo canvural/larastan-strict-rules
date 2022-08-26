@@ -21,9 +21,7 @@ use PHPStan\Type\ObjectType;
 use function count;
 use function strpos;
 
-/**
- * @implements Rule<InClassMethodNode>
- */
+/** @implements Rule<InClassMethodNode> */
 final class NoLocalQueryScopeRule implements Rule
 {
     /** @var ReflectionProvider */

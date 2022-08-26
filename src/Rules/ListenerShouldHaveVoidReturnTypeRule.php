@@ -20,9 +20,7 @@ use function stripos;
 /** @implements Rule<InClassMethodNode> */
 class ListenerShouldHaveVoidReturnTypeRule implements Rule
 {
-    /**
-     * @param string[] $listenerPaths
-     */
+    /** @param string[] $listenerPaths */
     public function __construct(private FileHelper $fileHelper, private array $listenerPaths)
     {
     }
