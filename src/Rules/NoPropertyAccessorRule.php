@@ -16,9 +16,7 @@ use PHPStan\ShouldNotHappenException;
 use function count;
 use function preg_match;
 
-/**
- * @implements Rule<InClassMethodNode>
- */
+/** @implements Rule<InClassMethodNode> */
 final class NoPropertyAccessorRule implements Rule
 {
     public function getNodeType(): string

@@ -8,14 +8,10 @@ use PHPStan\Node\InClassMethodNode;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 
-/**
- * @extends RuleTestCase<NoLocalQueryScopeRule>
- */
+/** @extends RuleTestCase<NoLocalQueryScopeRule> */
 class NoLocalQueryScopeRuleTest extends RuleTestCase
 {
-    /**
-     * @return Rule<InClassMethodNode>
-     */
+    /** @return Rule<InClassMethodNode> */
     protected function getRule(): Rule
     {
         return new NoLocalQueryScopeRule($this->createReflectionProvider());

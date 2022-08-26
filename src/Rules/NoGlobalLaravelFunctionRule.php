@@ -17,9 +17,7 @@ use function in_array;
 use function sprintf;
 use function stripos;
 
-/**
- * @implements Rule<FuncCall>
- */
+/** @implements Rule<FuncCall> */
 final class NoGlobalLaravelFunctionRule implements Rule
 {
     /** @var ReflectionProvider  */
@@ -28,9 +26,7 @@ final class NoGlobalLaravelFunctionRule implements Rule
     /** @var string[] */
     private $allowedFunctions;
 
-    /**
-     * @param string[] $allowedFunctions
-     */
+    /** @param string[] $allowedFunctions */
     public function __construct(ReflectionProvider $provider, array $allowedFunctions)
     {
         $this->provider         = $provider;
@@ -77,7 +73,7 @@ final class NoGlobalLaravelFunctionRule implements Rule
             return [
                 RuleErrorBuilder::message(sprintf(
                     "Global helper function '%s' should not be used.",
-                    $node->name
+                    $node->name,
                 ))->build(),
             ];
         }

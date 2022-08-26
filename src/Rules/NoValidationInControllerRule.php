@@ -19,9 +19,7 @@ use PHPStan\Type\UnionType;
 
 use function in_array;
 
-/**
- * @implements Rule<MethodCall>
- */
+/** @implements Rule<MethodCall> */
 final class NoValidationInControllerRule implements Rule
 {
     public function getNodeType(): string

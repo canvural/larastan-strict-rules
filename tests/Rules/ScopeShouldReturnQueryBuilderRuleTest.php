@@ -8,22 +8,16 @@ use PHPStan\Node\InClassMethodNode;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 
-/**
- * @extends RuleTestCase<ScopeShouldReturnQueryBuilderRule>
- */
+/** @extends RuleTestCase<ScopeShouldReturnQueryBuilderRule> */
 class ScopeShouldReturnQueryBuilderRuleTest extends RuleTestCase
 {
-    /**
-     * @return Rule<InClassMethodNode>
-     */
+    /** @return Rule<InClassMethodNode> */
     protected function getRule(): Rule
     {
         return new ScopeShouldReturnQueryBuilderRule($this->createReflectionProvider());
     }
 
-    /**
-     * @return string[]
-     */
+    /** @return string[] */
     public static function getAdditionalConfigFiles(): array
     {
         return [__DIR__ . '/extension.neon'];

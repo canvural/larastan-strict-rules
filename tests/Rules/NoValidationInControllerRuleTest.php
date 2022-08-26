@@ -8,14 +8,10 @@ use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 
-/**
- * @extends RuleTestCase<NoValidationInControllerRule>
- */
+/** @extends RuleTestCase<NoValidationInControllerRule> */
 class NoValidationInControllerRuleTest extends RuleTestCase
 {
-    /**
-     * @return Rule<MethodCall>
-     */
+    /** @return Rule<MethodCall> */
     protected function getRule(): Rule
     {
         return new NoValidationInControllerRule();
@@ -51,9 +47,7 @@ class NoValidationInControllerRuleTest extends RuleTestCase
         ]);
     }
 
-    /**
-     * @return string[]
-     */
+    /** @return string[] */
     public static function getAdditionalConfigFiles(): array
     {
         return [__DIR__ . '/extension.neon'];

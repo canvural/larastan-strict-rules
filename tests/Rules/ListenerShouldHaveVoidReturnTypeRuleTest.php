@@ -8,9 +8,7 @@ use PHPStan\File\FileHelper;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 
-/**
- * @extends RuleTestCase<ListenerShouldHaveVoidReturnTypeRule>
- */
+/** @extends RuleTestCase<ListenerShouldHaveVoidReturnTypeRule> */
 class ListenerShouldHaveVoidReturnTypeRuleTest extends RuleTestCase
 {
     protected function getRule(): Rule
@@ -21,9 +19,7 @@ class ListenerShouldHaveVoidReturnTypeRuleTest extends RuleTestCase
         );
     }
 
-    /**
-     * @return string[]
-     */
+    /** @return string[] */
     public static function getAdditionalConfigFiles(): array
     {
         return [__DIR__ . '/data/listeners.neon'];
