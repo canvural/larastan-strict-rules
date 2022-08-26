@@ -18,9 +18,7 @@ use PHPStan\ShouldNotHappenException;
 use function sprintf;
 use function str_starts_with;
 
-/**
- * @implements Rule<StaticCall>
- */
+/** @implements Rule<StaticCall> */
 final class NoFacadeRule implements Rule
 {
     public function __construct(private ReflectionProvider $provider)
@@ -54,16 +52,16 @@ final class NoFacadeRule implements Rule
                 return [
                     RuleErrorBuilder::message(sprintf(
                         '%s facade should not be used.',
-                        $className
+                        $className,
                     ))->build(),
                 ];
             }
-        } catch (ClassNotFoundException $e) {
+        } catch (ClassNotFoundException) {
             if (str_starts_with($className, 'Facades\\')) {
                 return [
                     RuleErrorBuilder::message(sprintf(
                         '%s facade should not be used.',
-                        $className
+                        $className,
                     ))->build(),
                 ];
             }

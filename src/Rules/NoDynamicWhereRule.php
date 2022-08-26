@@ -27,9 +27,7 @@ use PHPStan\Type\TypeCombinator;
 use function sprintf;
 use function strpos;
 
-/**
- * @implements Rule<MethodCall>
- */
+/** @implements Rule<MethodCall> */
 final class NoDynamicWhereRule implements Rule
 {
     /** @var ReflectionProvider */
@@ -121,7 +119,7 @@ final class NoDynamicWhereRule implements Rule
         return [
             RuleErrorBuilder::message(sprintf(
                 "Dynamic where method '%s' should not be used.",
-                $methodName
+                $methodName,
             ))->build(),
         ];
     }
@@ -143,7 +141,7 @@ final class NoDynamicWhereRule implements Rule
         return TypeCombinator::removeNull($calledOnType);
     }
 
-    private function findModel(ClassReflection $calledOnReflection): ?string
+    private function findModel(ClassReflection $calledOnReflection): string|null
     {
         if ($calledOnReflection->isSubclassOf(Model::class)) {
             return $calledOnReflection->getName();

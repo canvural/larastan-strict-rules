@@ -8,14 +8,10 @@ use PHPStan\Node\InClassMethodNode;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 
-/**
- * @extends RuleTestCase<NoPropertyAccessorRule>
- */
+/** @extends RuleTestCase<NoPropertyAccessorRule> */
 class NoPropertyAccessorRuleTest extends RuleTestCase
 {
-    /**
-     * @return Rule<InClassMethodNode>
-     */
+    /** @return Rule<InClassMethodNode> */
     protected function getRule(): Rule
     {
         return new NoPropertyAccessorRule();
