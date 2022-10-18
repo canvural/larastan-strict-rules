@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Vural\LarastanStrictRules\Rules;
 
 use NunoMaduro\Larastan\Methods\BuilderHelper;
+use NunoMaduro\Larastan\Methods\MacroMethodsClassReflectionExtension;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
@@ -15,7 +16,7 @@ class NoDynamicWhereRuleTest extends RuleTestCase
     /** @return Rule<MethodCall> */
     protected function getRule(): Rule
     {
-        return new NoDynamicWhereRule($this->createReflectionProvider(), new BuilderHelper($this->createReflectionProvider(), false));
+        return new NoDynamicWhereRule($this->createReflectionProvider(), new BuilderHelper($this->createReflectionProvider(), false, $this->getContainer()->getByType(MacroMethodsClassReflectionExtension::class)));
     }
 
     /** @return string[] */
