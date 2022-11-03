@@ -7,12 +7,12 @@
   ],
   "require": {
     "php": "^8.0",
-    "nunomaduro/larastan": "^2.2.5",
-    "phpstan/phpstan": "^1.8.10"
+    "nunomaduro/larastan": "^2.2.8",
+    "phpstan/phpstan": "^1.9"
   },
   "require-dev": {
     "doctrine/coding-standard": "^10",
-    "phpstan/phpstan-phpunit": "^1.0",
+    "phpstan/phpstan-phpunit": "^1.2",
     "phpunit/phpunit": "^9.5",
     "orchestra/testbench" : "^7.9.0",
     "roave/security-advisories": "dev-latest"
