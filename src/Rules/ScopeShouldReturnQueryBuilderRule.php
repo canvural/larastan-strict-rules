@@ -52,7 +52,7 @@ final class ScopeShouldReturnQueryBuilderRule implements Rule
         $classReflection  = $scope->getClassReflection();
         $methodReflection = $scope->getFunction();
 
-        if ($classReflection === null || $methodReflection === null) {
+        if ($methodReflection === null) {
             return [];
         }
 
