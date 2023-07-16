@@ -25,7 +25,8 @@ use PHPStan\Type\Type;
 use PHPStan\Type\TypeCombinator;
 
 use function sprintf;
-use function strpos;
+use function str_starts_with;
+use function ucfirst;
 
 /** @implements Rule<MethodCall> */
 final class NoDynamicWhereRule implements Rule
@@ -62,7 +63,7 @@ final class NoDynamicWhereRule implements Rule
 
         $methodName = $node->name->toString();
 
-        if ($methodName === 'where' || strpos($methodName, 'where') !== 0) {
+        if ($methodName === 'where' || ! str_starts_with($methodName, 'where')) {
             return [];
         }
 
@@ -101,6 +102,7 @@ final class NoDynamicWhereRule implements Rule
 
         if (
             $this->provider->getClass(Model::class)->hasNativeMethod($methodName) ||
+            $model && $this->provider->getClass($model)->hasNativeMethod('scope' . ucfirst($methodName)) ||
             $this->provider->getClass($eloquentBuilder)->hasNativeMethod($methodName) ||
             $this->provider->getClass(QueryBuilder::class)->hasNativeMethod($methodName) ||
             $this->provider->getClass(BelongsToMany::class)->hasNativeMethod($methodName)
@@ -153,7 +155,7 @@ final class NoDynamicWhereRule implements Rule
         ) {
             $modelType = $calledOnReflection->getActiveTemplateTypeMap()->getType('TModelClass');
 
-            if ($modelType === null || ! $modelType instanceof ObjectType) {
+            if (! $modelType instanceof ObjectType) {
                 return null;
             }
 
