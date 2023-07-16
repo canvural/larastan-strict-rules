@@ -112,3 +112,20 @@ class ModelWithPivotWhereClauses extends Model
         return $this->belongsToMany(Foo::class)->wherePivotNotNull('pivot_field');
     }
 }
+
+class ModelWithScope extends Model
+{
+    public function testScope()
+    {
+        return $this->whereFooBar();
+    }
+
+    /**
+     * @param Builder<Foo> $query
+     * @phpstan-return Builder<Foo>
+     */
+    public function scopeWhereFooBar($query): Builder
+    {
+        return $query->where('foo', 'bar');
+    }
+}
