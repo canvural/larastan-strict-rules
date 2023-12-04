@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Vural\LarastanStrictRules\Rules;
 
-use NunoMaduro\Larastan\Methods\BuilderHelper;
-use NunoMaduro\Larastan\Methods\MacroMethodsClassReflectionExtension;
+use Larastan\Larastan\Methods\BuilderHelper;
+use Larastan\Larastan\Methods\MacroMethodsClassReflectionExtension;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
