@@ -15,9 +15,6 @@ updates:
   - dependency-name: orchestra/testbench
     versions:
     - ">= 6.a, < 7"
-  - dependency-name: nunomaduro/larastan
-    versions:
-    - 0.7.2
   - dependency-name: orchestra/testbench
     versions:
     - 5.18.0
