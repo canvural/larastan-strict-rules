@@ -7,7 +7,7 @@
   ],
   "require": {
     "php": "^8.0",
-    "larastan/larastan": "^2.7",
+    "larastan/larastan": "^2.9",
     "phpstan/phpstan": "^1.9"
   },
   "require-dev": {
