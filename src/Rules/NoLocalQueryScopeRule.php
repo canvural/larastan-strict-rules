@@ -81,6 +81,10 @@ final class NoLocalQueryScopeRule implements Rule
             return [];
         }
 
-        return [RuleErrorBuilder::message('Local query scopes should not be used.')->build()];
+        return [
+            RuleErrorBuilder::message('Local query scopes should not be used.')
+                ->identifier('larastanStrictRules.noLocalQueryScope')
+                ->build(),
+        ];
     }
 }

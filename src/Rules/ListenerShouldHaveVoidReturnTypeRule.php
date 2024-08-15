@@ -73,7 +73,11 @@ class ListenerShouldHaveVoidReturnTypeRule implements Rule
         }
 
         if (! (new VoidType())->isSuperTypeOf(ParametersAcceptorSelector::selectSingle($methodReflection->getVariants())->getReturnType())->yes()) {
-            return [RuleErrorBuilder::message("Listeners handle method should have 'void' return type.")->build()];
+            return [
+                RuleErrorBuilder::message("Listeners handle method should have 'void' return type.")
+                    ->identifier('larastanStrictRules.listenerShouldHaveVoidReturnType')
+                    ->build(),
+            ];
         }
 
         return [];

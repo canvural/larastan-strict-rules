@@ -74,7 +74,9 @@ final class NoGlobalLaravelFunctionRule implements Rule
                 RuleErrorBuilder::message(sprintf(
                     "Global helper function '%s' should not be used.",
                     $node->name,
-                ))->build(),
+                ))
+                    ->identifier('larastanStrictRules.noGlobalLaravelFunction')
+                    ->build(),
             ];
         }
 

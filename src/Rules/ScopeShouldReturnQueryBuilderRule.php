@@ -83,11 +83,19 @@ final class ScopeShouldReturnQueryBuilderRule implements Rule
         $returnType = $parametersAcceptor->getReturnType();
 
         if (! ($returnType instanceof ObjectType)) {
-            return [RuleErrorBuilder::message('Query scope should return query builder instance.')->build()];
+            return [
+                RuleErrorBuilder::message('Query scope should return query builder instance.')
+                    ->identifier('larastanStrictRules.scopeShouldReturnQueryBuilderRule')
+                    ->build(),
+            ];
         }
 
         if ($returnType->getClassName() !== Builder::class && ! $this->provider->getClass($returnType->getClassName())->isSubclassOf(Builder::class)) {
-            return [RuleErrorBuilder::message('Query scope should return query builder instance.')->build()];
+            return [
+                RuleErrorBuilder::message('Query scope should return query builder instance.')
+                    ->identifier('larastanStrictRules.scopeShouldReturnQueryBuilderRule')
+                    ->build(),
+            ];
         }
 
         return [];

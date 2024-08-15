@@ -56,12 +56,24 @@ final class NoValidationInControllerRule implements Rule
 
         if ($calledOn instanceof ObjectType) {
             if ($calledOn->isInstanceOf(Request::class)->yes()) {
-                return [RuleErrorBuilder::message('Request validation should be done in FormRequest not in Controller.')->build()];
+                return [
+                    RuleErrorBuilder::message('Request validation should be done in FormRequest not in Controller.')
+                        ->identifier('larastanStrictRules.noValidationInController')
+                        ->build(),
+                ];
             }
         } elseif (($calledOn instanceof ThisType) && $calledOn->getStaticObjectType()->isInstanceOf(Controller::class)->yes()) {
-            return [RuleErrorBuilder::message('Request validation should be done in FormRequest not in Controller.')->build()];
+            return [
+                RuleErrorBuilder::message('Request validation should be done in FormRequest not in Controller.')
+                    ->identifier('larastanStrictRules.noValidationInController')
+                    ->build(),
+            ];
         } elseif ($calledOn instanceof UnionType && $calledOn->accepts(new ObjectType(Request::class), true)->yes()) {
-            return [RuleErrorBuilder::message('Request validation should be done in FormRequest not in Controller.')->build()];
+            return [
+                RuleErrorBuilder::message('Request validation should be done in FormRequest not in Controller.')
+                    ->identifier('larastanStrictRules.noValidationInController')
+                    ->build(),
+            ];
         }
 
         return [];

@@ -53,7 +53,9 @@ final class NoFacadeRule implements Rule
                     RuleErrorBuilder::message(sprintf(
                         '%s facade should not be used.',
                         $className,
-                    ))->build(),
+                    ))
+                        ->identifier('larastanStrictRules.noFacadeRule')
+                        ->build(),
                 ];
             }
         } catch (ClassNotFoundException) {
@@ -62,7 +64,9 @@ final class NoFacadeRule implements Rule
                     RuleErrorBuilder::message(sprintf(
                         '%s facade should not be used.',
                         $className,
-                    ))->build(),
+                    ))
+                        ->identifier('larastanStrictRules.noFacade')
+                        ->build(),
                 ];
             }
         }

@@ -122,7 +122,9 @@ final class NoDynamicWhereRule implements Rule
             RuleErrorBuilder::message(sprintf(
                 "Dynamic where method '%s' should not be used.",
                 $methodName,
-            ))->build(),
+            ))
+                ->identifier('larastanStrictRules.noDynamicWhere')
+                ->build(),
         ];
     }
 

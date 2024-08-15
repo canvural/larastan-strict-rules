@@ -55,6 +55,10 @@ final class NoPropertyAccessorRule implements Rule
             return [];
         }
 
-        return [RuleErrorBuilder::message('Model property accessors should not be used.')->build()];
+        return [
+            RuleErrorBuilder::message('Model property accessors should not be used.')
+                ->identifier('larastanStrictRules.noPropertyAccessor')
+                ->build(),
+        ];
     }
 }
