@@ -1,38 +1,66 @@
 parameters:
+    larastanStrictRules:
+        noDynamicWhere: true
+        noFacade: true
+        noGlobalLaravelFunction: true
+        noLocalQueryScope: false
+        noPropertyAccessor: false
+        noValidationInController: true
+        scopeShouldReturnQueryBuilder: true
+        listenerShouldHaveVoidReturnType: true
     allowedGlobalFunctions: []
     listenerPaths: []
 
 parametersSchema:
+    larastanStrictRules: structure([
+      noDynamicWhere: bool(),
+      noFacade: bool(),
+      noGlobalLaravelFunction: bool(),
+      noLocalQueryScope: bool(),
+      noPropertyAccessor: bool(),
+      noValidationInController: bool(),
+      scopeShouldReturnQueryBuilder: bool(),
+      listenerShouldHaveVoidReturnType: bool(),
+    ])
     allowedGlobalFunctions: listOf(string())
     listenerPaths: listOf(string())
 
 services:
-    -
-        class: Vural\LarastanStrictRules\Rules\NoDynamicWhereRule
-        tags:
-            - phpstan.rules.rule
-    -
-        class: Vural\LarastanStrictRules\Rules\NoFacadeRule
-        tags:
-            - phpstan.rules.rule
-    -
-        class: Vural\LarastanStrictRules\Rules\NoGlobalLaravelFunctionRule
-        arguments:
-            allowedFunctions: %allowedGlobalFunctions%
-        tags:
-            - phpstan.rules.rule
-    -
-        class: Vural\LarastanStrictRules\Rules\NoValidationInControllerRule
-        tags:
-            - phpstan.rules.rule
-    -
-        class: Vural\LarastanStrictRules\Rules\ScopeShouldReturnQueryBuilderRule
-        tags:
-            - phpstan.rules.rule
+  -
+    class: Vural\LarastanStrictRules\Rules\NoDynamicWhereRule
+  -
+    class: Vural\LarastanStrictRules\Rules\NoFacadeRule
+  -
+    class: Vural\LarastanStrictRules\Rules\NoGlobalLaravelFunctionRule
+    arguments:
+      allowedFunctions: %allowedGlobalFunctions%
+  -
+    class: Vural\LarastanStrictRules\Rules\NoLocalQueryScopeRule
+  -
+    class: Vural\LarastanStrictRules\Rules\NoPropertyAccessorRule
+  -
+    class: Vural\LarastanStrictRules\Rules\NoValidationInControllerRule
+  -
+    class: Vural\LarastanStrictRules\Rules\ScopeShouldReturnQueryBuilderRule
+  -
+    class: Vural\LarastanStrictRules\Rules\ListenerShouldHaveVoidReturnTypeRule
+    arguments:
+      listenerPaths: %listenerPaths%
 
-    -
-        class: Vural\LarastanStrictRules\Rules\ListenerShouldHaveVoidReturnTypeRule
-        arguments:
-            listenerPaths: %listenerPaths%
-        tags:
-            - phpstan.rules.rule
+conditionalTags:
+    Vural\LarastanStrictRules\Rules\NoDynamicWhereRule:
+        phpstan.rules.rule: %larastanStrictRules.noDynamicWhere%
+    Vural\LarastanStrictRules\Rules\NoFacadeRule:
+        phpstan.rules.rule: %larastanStrictRules.noFacade%
+    Vural\LarastanStrictRules\Rules\NoGlobalLaravelFunctionRule:
+        phpstan.rules.rule: %larastanStrictRules.noGlobalLaravelFunction%
+    Vural\LarastanStrictRules\Rules\NoLocalQueryScopeRule:
+        phpstan.rules.rule: %larastanStrictRules.noLocalQueryScope%
+    Vural\LarastanStrictRules\Rules\NoPropertyAccessorRule:
+        phpstan.rules.rule: %larastanStrictRules.noPropertyAccessor%
+    Vural\LarastanStrictRules\Rules\NoValidationInControllerRule:
+        phpstan.rules.rule: %larastanStrictRules.noValidationInController%
+    Vural\LarastanStrictRules\Rules\ScopeShouldReturnQueryBuilderRule:
+        phpstan.rules.rule: %larastanStrictRules.scopeShouldReturnQueryBuilder%
+    Vural\LarastanStrictRules\Rules\ListenerShouldHaveVoidReturnTypeRule:
+        phpstan.rules.rule: %larastanStrictRules.listenerShouldHaveVoidReturnType%
