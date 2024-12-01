@@ -17,8 +17,8 @@ jobs:
 
     strategy:
       matrix:
-        php: [8.0]
-        dependencies: [locked]
+        php: [8.1]
+        dependencies: [lowest]
 
     steps:
       - name: "Checkout"
@@ -39,7 +39,7 @@ jobs:
         run: "echo \"::set-output name=directory::$(composer config cache-dir)\""
 
       - name: "Cache dependencies installed with composer"
-        uses: "actions/cache@v2.1.5"
+        uses: "actions/cache@v4"
         with:
           path: "${{ steps.determine-composer-cache-directory.outputs.directory }}"
           key: "php-${{ matrix.php }}-composer-${{ matrix.dependencies }}-${{ hashFiles('composer.lock') }}"
@@ -47,15 +47,11 @@ jobs:
 
       - name: "Install lowest dependencies from composer.json"
         if: "matrix.dependencies == 'lowest'"
-        run: "composer update --no-interaction --no-progress --no-suggest --prefer-lowest"
-
-      - name: "Install locked dependencies from composer.lock"
-        if: "matrix.dependencies == 'locked'"
-        run: "composer install --no-interaction --no-progress --no-suggest"
+        run: "composer update --no-interaction --no-progress --prefer-lowest"
 
       - name: "Install highest dependencies from composer.json"
         if: "matrix.dependencies == 'highest'"
-        run: "composer update --no-interaction --no-progress --no-suggest"
+        run: "composer update --no-interaction --no-progress"
 
       - name: "Run phpcs"
         run: "composer codestyle"
@@ -67,9 +63,8 @@ jobs:
 
     strategy:
       matrix:
-        php: [8.0]
-
-        dependencies: [locked]
+        php: [8.1]
+        dependencies: [lowest]
 
     steps:
       - name: "Checkout"
@@ -87,7 +82,7 @@ jobs:
         run: "echo \"::set-output name=directory::$(composer config cache-dir)\""
 
       - name: "Cache dependencies installed with composer"
-        uses: "actions/cache@v2.1.5"
+        uses: "actions/cache@v4"
         with:
           path: "${{ steps.determine-composer-cache-directory.outputs.directory }}"
           key: "php-${{ matrix.php }}-composer-${{ matrix.dependencies }}-${{ hashFiles('composer.lock') }}"
@@ -95,21 +90,17 @@ jobs:
 
       - name: "Install lowest dependencies from composer.json"
         if: "matrix.dependencies == 'lowest'"
-        run: "composer update --no-interaction --no-progress --no-suggest --prefer-lowest"
-
-      - name: "Install locked dependencies from composer.lock"
-        if: "matrix.dependencies == 'locked'"
-        run: "composer install --no-interaction --no-progress --no-suggest"
+        run: "composer update --no-interaction --no-progress --prefer-lowest"
 
       - name: "Install highest dependencies from composer.json"
         if: "matrix.dependencies == 'highest'"
-        run: "composer update --no-interaction --no-progress --no-suggest"
+        run: "composer update --no-interaction --no-progress"
 
       - name: "Create cache directory for phpstan/phpstan"
         run: "mkdir -p .build/phpstan"
 
       - name: "Cache cache directory for phpstan/phpstan"
-        uses: "actions/cache@v2.1.5"
+        uses: "actions/cache@v4"
         with:
           path: ".build/phpstan"
           key: "php-${{ matrix.php }}-phpstan-${{ github.sha }}"
@@ -125,12 +116,28 @@ jobs:
 
     strategy:
       matrix:
-        php: [8.0, 8.1]
-
-        dependencies:
-          - "lowest"
-          - "locked"
-          - "highest"
+        php: [8.1, 8.2, 8.3, 8.4 ]
+        orchestra: [ "^7.47", "^8.13", "^9.0" ]
+        dependencies: [ lowest, highest ]
+        exclude:
+          - php: "8.1"
+            orchestra: "^9.0"
+            dependencies: "highest"
+          - php: "8.1"
+            orchestra: "^9.0"
+            dependencies: "lowest"
+          - php: "8.4"
+            orchestra: "^7.47"
+            dependencies: "highest"
+          - php: "8.4"
+            orchestra: "^7.47"
+            dependencies: "lowest"
+          - php: "8.4"
+            orchestra: "^8.13"
+            dependencies: "highest"
+          - php: "8.4"
+            orchestra: "^8.13"
+            dependencies: "lowest"
 
     steps:
       - name: "Checkout"
@@ -148,23 +155,19 @@ jobs:
         run: "echo \"::set-output name=directory::$(composer config cache-dir)\""
 
       - name: "Cache dependencies installed with composer"
-        uses: "actions/cache@v2.1.5"
+        uses: "actions/cache@v4"
         with:
           path: "${{ steps.determine-composer-cache-directory.outputs.directory }}"
-          key: "php-${{ matrix.php }}-composer-${{ matrix.dependencies }}-${{ hashFiles('composer.lock') }}"
-          restore-keys: "php-${{ matrix.php }}-composer-${{ matrix.dependencies }}-"
+          key: "php-${{ matrix.php }}-${{ matrix.orchestra }}-composer-${{ matrix.dependencies }}-${{ hashFiles('composer.lock') }}"
+          restore-keys: "php-${{ matrix.php }}-${{ matrix.orchestra }}-composer-${{ matrix.dependencies }}-"
 
       - name: "Install lowest dependencies from composer.json"
         if: "matrix.dependencies == 'lowest'"
-        run: "composer update --no-interaction --no-progress --no-suggest --prefer-lowest"
-
-      - name: "Install locked dependencies from composer.lock"
-        if: "matrix.dependencies == 'locked'"
-        run: "composer install --no-interaction --no-progress --no-suggest"
+        run: "composer update --with='orchestra/testbench:${{ matrix.orchestra }}' --no-interaction --no-progress --prefer-lowest"
 
       - name: "Install highest dependencies from composer.json"
         if: "matrix.dependencies == 'highest'"
-        run: "composer update --no-interaction --no-progress --no-suggest"
+        run: "composer update --with='orchestra/testbench:${{ matrix.orchestra }}' --no-interaction --no-progress"
 
       - name: "Run all tests"
         run: "composer test"
@@ -176,10 +179,9 @@ jobs:
 
     strategy:
       matrix:
-        php: [8.0]
-
+        php: [8.1]
         dependencies:
-          - "locked"
+          - "lowest"
 
     steps:
       - name: "Checkout"
@@ -197,7 +199,7 @@ jobs:
         run: "echo \"::set-output name=directory::$(composer config cache-dir)\""
 
       - name: "Cache dependencies installed with composer"
-        uses: "actions/cache@v2.1.5"
+        uses: "actions/cache@v4"
         with:
           path: "${{ steps.determine-composer-cache-directory.outputs.directory }}"
           key: "php-${{ matrix.php }}-composer-${{ matrix.dependencies }}-${{ hashFiles('composer.lock') }}"
@@ -205,15 +207,11 @@ jobs:
 
       - name: "Install lowest dependencies from composer.json"
         if: "matrix.dependencies == 'lowest'"
-        run: "composer update --no-interaction --no-progress --no-suggest --prefer-lowest"
-
-      - name: "Install locked dependencies from composer.lock"
-        if: "matrix.dependencies == 'locked'"
-        run: "composer install --no-interaction --no-progress --no-suggest"
+        run: "composer update --no-interaction --no-progress --prefer-lowest"
 
       - name: "Install highest dependencies from composer.json"
         if: "matrix.dependencies == 'highest'"
-        run: "composer update --no-interaction --no-progress --no-suggest"
+        run: "composer update --no-interaction --no-progress"
 
       - name: "Collect code coverage with pcov and phpunit/phpunit"
         run: "composer test-coverage"
