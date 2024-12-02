@@ -16,25 +16,47 @@ composer require --dev canvural/larastan-strict-rules
 
 To enable all the rules, include `rules.neon` in your project's PHPStan config:
 
-```
+```neon
 includes:
     - vendor/canvural/larastan-strict-rules/rules.neon
 ```
 
+## Disabling rules
+
+You can disable rules using configuration parameters:
+
+```neon
+parameters:
+    larastanStrictRules:
+        noDynamicWhere: false
+        noFacade: false
+        noGlobalLaravelFunction: false
+        noLocalQueryScope: false
+        noPropertyAccessor: false
+        noValidationInController: false
+        scopeShouldReturnQueryBuilder: false
+        listenerShouldHaveVoidReturnType: false
+```
 
 ## Enabling rules one-by-one
-If you don't want to start using all the available strict rules at once but only one or two, you can! Just don't include the whole `rules.neon` from this package in your configuration, but look at its contents and copy only the rules you want to your configuration under the `services` key. For example:
 
+If you don't want to start using all the available strict rules at once but only one or two, you can!
+
+You can disable all rules from the included `rules.neon` with:
+
+```neon
+parameters:
+	larastanStrictRules:
+		allRules: false
 ```
-services:
-    -
-        class: Vural\LarastanStrictRules\Rules\NoDynamicWhereRule
-        tags:
-            - phpstan.rules.rule
-    -
-        class: Vural\LarastanStrictRules\Rules\NoFacadeRule
-        tags:
-            - phpstan.rules.rule
+
+Then you can re-enable individual rules with configuration parameters:
+
+```neon
+parameters:
+	larastanStrictRules:
+		allRules: false
+		noDynamicWhere: true
 ```
 
 ## Rules
