@@ -1,26 +1,28 @@
 parameters:
     larastanStrictRules:
-        noDynamicWhere: true
-        noFacade: true
-        noGlobalLaravelFunction: true
-        noLocalQueryScope: false
-        noPropertyAccessor: false
-        noValidationInController: true
-        scopeShouldReturnQueryBuilder: true
-        listenerShouldHaveVoidReturnType: true
+        allRules: true
+        noDynamicWhere: %larastanStrictRules.allRules%
+        noFacade: %larastanStrictRules.allRules%
+        noGlobalLaravelFunction: %larastanStrictRules.allRules%
+        noLocalQueryScope: %larastanStrictRules.allRules%
+        noPropertyAccessor: %larastanStrictRules.allRules%
+        noValidationInController: %larastanStrictRules.allRules%
+        scopeShouldReturnQueryBuilder: %larastanStrictRules.allRules%
+        listenerShouldHaveVoidReturnType: %larastanStrictRules.allRules%
     allowedGlobalFunctions: []
     listenerPaths: []
 
 parametersSchema:
     larastanStrictRules: structure([
-      noDynamicWhere: bool(),
-      noFacade: bool(),
-      noGlobalLaravelFunction: bool(),
-      noLocalQueryScope: bool(),
-      noPropertyAccessor: bool(),
-      noValidationInController: bool(),
-      scopeShouldReturnQueryBuilder: bool(),
-      listenerShouldHaveVoidReturnType: bool(),
+      allRules: anyOf(bool(), arrayOf(bool())),
+      noDynamicWhere: anyOf(bool(), arrayOf(bool())),
+      noFacade: anyOf(bool(), arrayOf(bool())),
+      noGlobalLaravelFunction: anyOf(bool(), arrayOf(bool())),
+      noLocalQueryScope: anyOf(bool(), arrayOf(bool())),
+      noPropertyAccessor: anyOf(bool(), arrayOf(bool())),
+      noValidationInController: anyOf(bool(), arrayOf(bool())),
+      scopeShouldReturnQueryBuilder: anyOf(bool(), arrayOf(bool())),
+      listenerShouldHaveVoidReturnType: anyOf(bool(), arrayOf(bool())),
     ])
     allowedGlobalFunctions: listOf(string())
     listenerPaths: listOf(string())
