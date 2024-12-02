@@ -9,13 +9,11 @@ use Illuminate\Database\Eloquent\Model;
 use PhpParser\Node;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassMethodNode;
-use PHPStan\Reflection\ParametersAcceptorSelector;
 use PHPStan\Reflection\Php\PhpParameterFromParserNodeReflection;
 use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
-use PHPStan\Type\ObjectType;
 
 use function count;
 use function str_starts_with;
@@ -67,26 +65,26 @@ final class ScopeShouldReturnQueryBuilderRule implements Rule
             return [];
         }
 
-        $parametersAcceptor = ParametersAcceptorSelector::selectSingle($methodReflection->getVariants());
-
         /** @var PhpParameterFromParserNodeReflection $firstParameter */
-        $firstParameter = $parametersAcceptor->getParameters()[0];
+        $firstParameter = $methodReflection->getParameters()[0];
 
-        if (! ($firstParameter->getType() instanceof ObjectType)) {
+        $parameterClassNames = $firstParameter->getType()->getObjectClassNames();
+
+        if (count($parameterClassNames) < 1) {
             return [];
         }
 
-        if ($firstParameter->getType()->getClassName() !== Builder::class && ! $this->provider->getClass($firstParameter->getType()->getClassName())->isSubclassOf(Builder::class)) {
+        if ($parameterClassNames[0] !== Builder::class && ! $this->provider->getClass($parameterClassNames[0])->isSubclassOf(Builder::class)) {
             return [];
         }
 
-        $returnType = $parametersAcceptor->getReturnType();
+        $returnTypeClassNames = $methodReflection->getReturnType()->getObjectClassNames();
 
-        if (! ($returnType instanceof ObjectType)) {
+        if (count($returnTypeClassNames) !== 1) {
             return [RuleErrorBuilder::message('Query scope should return query builder instance.')->build()];
         }
 
-        if ($returnType->getClassName() !== Builder::class && ! $this->provider->getClass($returnType->getClassName())->isSubclassOf(Builder::class)) {
+        if ($returnTypeClassNames[0] !== Builder::class && ! $this->provider->getClass($returnTypeClassNames[0])->isSubclassOf(Builder::class)) {
             return [RuleErrorBuilder::message('Query scope should return query builder instance.')->build()];
         }
 

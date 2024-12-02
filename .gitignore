@@ -5,3 +5,5 @@ vendor
 coverage
 .phpunit.result.cache
 .idea
+tests/.phpunit.cache
+tests/phpunit.xml.bak

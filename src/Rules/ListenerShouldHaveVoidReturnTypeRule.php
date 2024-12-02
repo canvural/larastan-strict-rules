@@ -8,7 +8,6 @@ use PhpParser\Node;
 use PHPStan\Analyser\Scope;
 use PHPStan\File\FileHelper;
 use PHPStan\Node\InClassMethodNode;
-use PHPStan\Reflection\ParametersAcceptorSelector;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
@@ -52,7 +51,7 @@ class ListenerShouldHaveVoidReturnTypeRule implements Rule
         }
 
         // handle method should except event as parameter
-        if (count(ParametersAcceptorSelector::selectSingle($methodReflection->getVariants())->getParameters()) < 1) {
+        if (count($methodReflection->getParameters()) < 1) {
             return [];
         }
 
@@ -72,7 +71,7 @@ class ListenerShouldHaveVoidReturnTypeRule implements Rule
             return [];
         }
 
-        if (! (new VoidType())->isSuperTypeOf(ParametersAcceptorSelector::selectSingle($methodReflection->getVariants())->getReturnType())->yes()) {
+        if (! (new VoidType())->isSuperTypeOf($methodReflection->getReturnType())->yes()) {
             return [RuleErrorBuilder::message("Listeners handle method should have 'void' return type.")->build()];
         }
 
