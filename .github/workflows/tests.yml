@@ -17,7 +17,7 @@ jobs:
 
     strategy:
       matrix:
-        php: [8.1]
+        php: [8.2]
         dependencies: [lowest]
 
     steps:
@@ -63,7 +63,7 @@ jobs:
 
     strategy:
       matrix:
-        php: [8.1]
+        php: [8.2]
         dependencies: [lowest]
 
     steps:
@@ -116,28 +116,9 @@ jobs:
 
     strategy:
       matrix:
-        php: [8.1, 8.2, 8.3, 8.4 ]
-        orchestra: [ "^7.47", "^8.13", "^9.0" ]
+        php: [ 8.2, 8.3, 8.4 ]
+        orchestra: [ "^9.0" ]
         dependencies: [ lowest, highest ]
-        exclude:
-          - php: "8.1"
-            orchestra: "^9.0"
-            dependencies: "highest"
-          - php: "8.1"
-            orchestra: "^9.0"
-            dependencies: "lowest"
-          - php: "8.4"
-            orchestra: "^7.47"
-            dependencies: "highest"
-          - php: "8.4"
-            orchestra: "^7.47"
-            dependencies: "lowest"
-          - php: "8.4"
-            orchestra: "^8.13"
-            dependencies: "highest"
-          - php: "8.4"
-            orchestra: "^8.13"
-            dependencies: "lowest"
 
     steps:
       - name: "Checkout"
@@ -179,7 +160,7 @@ jobs:
 
     strategy:
       matrix:
-        php: [8.1]
+        php: [8.2]
         dependencies:
           - "lowest"
 

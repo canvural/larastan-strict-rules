@@ -9,14 +9,12 @@ use Illuminate\Database\Eloquent\Model;
 use PhpParser\Node;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassMethodNode;
-use PHPStan\Reflection\ParametersAcceptorSelector;
 use PHPStan\Reflection\Php\PhpParameterFromParserNodeReflection;
 use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\ShouldNotHappenException;
-use PHPStan\Type\ObjectType;
 
 use function count;
 use function strpos;
@@ -68,16 +66,16 @@ final class NoLocalQueryScopeRule implements Rule
             return [];
         }
 
-        $parametersAcceptor = ParametersAcceptorSelector::selectSingle($methodReflection->getVariants());
-
         /** @var PhpParameterFromParserNodeReflection $firstParameter */
-        $firstParameter = $parametersAcceptor->getParameters()[0];
+        $firstParameter = $methodReflection->getParameters()[0];
 
-        if (! ($firstParameter->getType() instanceof ObjectType)) {
+        $parameterClassNames = $firstParameter->getType()->getObjectClassNames();
+
+        if (count($parameterClassNames) !== 1) {
             return [];
         }
 
-        if ($firstParameter->getType()->getClassName() !== Builder::class && ! $this->provider->getClass($firstParameter->getType()->getClassName())->isSubclassOf(Builder::class)) {
+        if ($parameterClassNames[0] !== Builder::class && ! $this->provider->getClass($parameterClassNames[0])->isSubclassOf(Builder::class)) {
             return [];
         }
 
