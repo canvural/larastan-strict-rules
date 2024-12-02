@@ -73,14 +73,12 @@ This rule disallows the usage of Laravel Facades. Also, checks for the real time
 
 This rule disallows the usage of global helper functions that comes with Laravel.
 
-If you want to allow some functions, you can use the `allowedFunctions` parameter for this rule. Like so:
+If you want to allow some functions, you can use the `allowedGlobalFunctions` parameter. Like so:
 ```neon
--
-    class: Vural\LarastanStrictRules\Rules\NoGlobalLaravelFunctionRule
-    arguments:
-        allowedFunctions:
-            - app
-            - event
+parameters:
+    allowedGlobalFunctions:
+        - app
+        - event
 ```
 
 #### `NoValidationInControllerRule`
@@ -107,12 +105,10 @@ If you return `false` from an event listener, Laravel will stop the propagation 
 
 You need to configure this rule by adding the directories that your event listeners are in to the `listenerPaths` parameter:
 ```neon
--
-    class: Vural\LarastanStrictRules\Rules\ListenerShouldHaveVoidReturnTypeRule
-    arguments:
-        listenerPaths:
-            - app/Listeners
-            - app/DomainA/Listeners
+parameters:
+    listenerPaths:
+        - app/Listeners
+        - app/DomainA/Listeners
 ```
 
 ## Changelog
