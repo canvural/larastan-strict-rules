@@ -1,32 +1,61 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Calling PHPStan\\\\Reflection\\\\Php\\\\PhpFunctionReflection\\:\\:getFileName\\(\\) is not covered by backward compatibility promise\\. The method might change in a minor PHPStan version\\.$#"
+			message: '#^Doing instanceof PHPStan\\Type\\Generic\\GenericObjectType is error\-prone and deprecated\.$#'
+			identifier: phpstanApi.instanceofType
 			count: 1
-			path: src/Rules/NoGlobalLaravelFunctionRule.php
+			path: src/Rules/NoDynamicWhereRule.php
 
 		-
-			message: "#^Calling PHPStan\\\\Reflection\\\\Php\\\\PhpFunctionReflection\\:\\:getName\\(\\) is not covered by backward compatibility promise\\. The method might change in a minor PHPStan version\\.$#"
-			count: 1
-			path: src/Rules/NoGlobalLaravelFunctionRule.php
-
-		-
-			message: "#^Calling PHPStan\\\\Reflection\\\\Php\\\\PhpParameterFromParserNodeReflection\\:\\:getType\\(\\) is not covered by backward compatibility promise\\. The method might change in a minor PHPStan version\\.$#"
+			message: '#^Doing instanceof PHPStan\\Type\\ObjectType is error\-prone and deprecated\. Use Type\:\:isObject\(\) or Type\:\:getObjectClassNames\(\) instead\.$#'
+			identifier: phpstanApi.instanceofType
 			count: 3
+			path: src/Rules/NoDynamicWhereRule.php
+
+		-
+			message: '#^Asking about instanceof PHPStan\\Reflection\\Php\\PhpFunctionReflection is not covered by backward compatibility promise\. The class might change in a minor PHPStan version\.$#'
+			identifier: phpstanApi.class
+			count: 1
+			path: src/Rules/NoGlobalLaravelFunctionRule.php
+
+		-
+			message: '#^Calling PHPStan\\Reflection\\Php\\PhpFunctionReflection\:\:getFileName\(\) is not covered by backward compatibility promise\. The method might change in a minor PHPStan version\.$#'
+			identifier: phpstanApi.method
+			count: 1
+			path: src/Rules/NoGlobalLaravelFunctionRule.php
+
+		-
+			message: '#^Calling PHPStan\\Reflection\\Php\\PhpFunctionReflection\:\:getName\(\) is not covered by backward compatibility promise\. The method might change in a minor PHPStan version\.$#'
+			identifier: phpstanApi.method
+			count: 1
+			path: src/Rules/NoGlobalLaravelFunctionRule.php
+
+		-
+			message: '#^Calling PHPStan\\Reflection\\Php\\PhpParameterFromParserNodeReflection\:\:getType\(\) is not covered by backward compatibility promise\. The method might change in a minor PHPStan version\.$#'
+			identifier: phpstanApi.method
+			count: 1
 			path: src/Rules/NoLocalQueryScopeRule.php
 
 		-
-			message: "#^Calling PHPStan\\\\Reflection\\\\Php\\\\PhpParameterFromParserNodeReflection\\:\\:getType\\(\\) is not covered by backward compatibility promise\\. The method might change in a minor PHPStan version\\.$#"
-			count: 3
+			message: '#^Doing instanceof PHPStan\\Type\\ObjectType is error\-prone and deprecated\. Use Type\:\:isObject\(\) or Type\:\:getObjectClassNames\(\) instead\.$#'
+			identifier: phpstanApi.instanceofType
+			count: 1
+			path: src/Rules/NoValidationInControllerRule.php
+
+		-
+			message: '#^Calling PHPStan\\Reflection\\Php\\PhpParameterFromParserNodeReflection\:\:getType\(\) is not covered by backward compatibility promise\. The method might change in a minor PHPStan version\.$#'
+			identifier: phpstanApi.method
+			count: 1
 			path: src/Rules/ScopeShouldReturnQueryBuilderRule.php
 
 		-
-			message: "#^Creating new PHPStan\\\\File\\\\FileHelper is not covered by backward compatibility promise\\. The class might change in a minor PHPStan version\\.$#"
+			message: '#^Creating new PHPStan\\File\\FileHelper is not covered by backward compatibility promise\. The class might change in a minor PHPStan version\.$#'
+			identifier: phpstanApi.constructor
 			count: 1
 			path: tests/Rules/ListenerShouldHaveVoidReturnTypeRuleTest.php
 
 		-
-			message: "#^Parameter \\#2 \\$listenerPaths of class Vural\\\\LarastanStrictRules\\\\Rules\\\\ListenerShouldHaveVoidReturnTypeRule constructor expects array\\<string\\>, mixed given\\.$#"
+			message: '#^Parameter \#2 \$listenerPaths of class Vural\\LarastanStrictRules\\Rules\\ListenerShouldHaveVoidReturnTypeRule constructor expects array\<string\>, mixed given\.$#'
+			identifier: argument.type
 			count: 1
 			path: tests/Rules/ListenerShouldHaveVoidReturnTypeRuleTest.php
-
