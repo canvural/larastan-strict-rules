@@ -7,6 +7,7 @@ namespace Vural\LarastanStrictRules\Rules;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 use Larastan\Larastan\Methods\BuilderHelper;
 use PhpParser\Node;
@@ -76,7 +77,8 @@ final class NoDynamicWhereRule implements Rule
         if (
             $calledOnType->isInstanceOf(Model::class)->no() &&
             $calledOnType->isInstanceOf(EloquentBuilder::class)->no() &&
-            $calledOnType->isInstanceOf(QueryBuilder::class)->no()
+            $calledOnType->isInstanceOf(QueryBuilder::class)->no() &&
+            $calledOnType->isInstanceOf(Relation::class)->no()
         ) {
             return [];
         }
@@ -130,13 +132,7 @@ final class NoDynamicWhereRule implements Rule
 
     private function getCalledOnType(MethodCall $node, Scope $scope): Type
     {
-        $methodCall = $node;
-
-        while ($methodCall->var instanceof MethodCall) {
-            $methodCall = $methodCall->var;
-        }
-
-        $calledOnType = $scope->getType($methodCall->var);
+        $calledOnType = $scope->getType($node->var);
 
         if ($calledOnType instanceof ThisType) {
             $calledOnType = $calledOnType->getStaticObjectType();
@@ -156,6 +152,19 @@ final class NoDynamicWhereRule implements Rule
             $calledOnReflection->isSubclassOf(EloquentBuilder::class)
         ) {
             $modelType = $calledOnReflection->getActiveTemplateTypeMap()->getType('TModelClass');
+
+            if (! $modelType instanceof ObjectType) {
+                return null;
+            }
+
+            return $modelType->getClassName();
+        }
+
+        if (
+            $calledOnReflection->getName() === Relation::class ||
+            $calledOnReflection->isSubclassOf(Relation::class)
+        ) {
+            $modelType = $calledOnReflection->getActiveTemplateTypeMap()->getType('TRelatedModel');
 
             if (! $modelType instanceof ObjectType) {
                 return null;
