@@ -72,41 +72,49 @@ class CustomEloquentBuilder extends Builder
 
 class ModelWithPivotWhereClauses extends Model
 {
+    /** @return BelongsToMany<Foo, $this> */
     public function fooWherePivot(): BelongsToMany
     {
         return $this->belongsToMany(Foo::class)->wherePivot('pivot_field', 1);
     }
 
+    /** @return BelongsToMany<Foo, $this> */
     public function fooWherePivotBetween(): BelongsToMany
     {
         return $this->belongsToMany(Foo::class)->wherePivotBetween('pivot_field', [1, 2]);
     }
 
+    /** @return BelongsToMany<Foo, $this> */
     public function fooWherePivotNotBetween(): BelongsToMany
     {
         return $this->belongsToMany(Foo::class)->wherePivotNotBetween('pivot_field', [1, 2]);
     }
 
+    /** @return BelongsToMany<Foo, $this> */
     public function fooWherePivotIn(): BelongsToMany
     {
         return $this->belongsToMany(Foo::class)->wherePivotIn('pivot_field', [1, 2]);
     }
 
+    /** @return BelongsToMany<Foo, $this> */
     public function fooWithPivotValue(): BelongsToMany
     {
         return $this->belongsToMany(Foo::class)->withPivotValue('pivot_field', 1);
     }
 
+    /** @return BelongsToMany<Foo, $this> */
     public function fooWherePivotNotIn(): BelongsToMany
     {
         return $this->belongsToMany(Foo::class)->wherePivotNotIn('pivot_field', [1, 2]);
     }
 
+    /** @return BelongsToMany<Foo, $this> */
     public function fooWherePivotNull(): BelongsToMany
     {
         return $this->belongsToMany(Foo::class)->wherePivotNull('pivot_field');
     }
 
+    /** @return BelongsToMany<Foo, $this> */
     public function fooWherePivotNotNull(): BelongsToMany
     {
         return $this->belongsToMany(Foo::class)->wherePivotNotNull('pivot_field');
@@ -127,5 +135,31 @@ class ModelWithScope extends Model
     public function scopeWhereFooBar($query): Builder
     {
         return $query->where('foo', 'bar');
+    }
+}
+
+class Account extends Model
+{
+    /** @return \Illuminate\Database\Eloquent\Relations\HasMany<AccountAction, $this> */
+    public function actions(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(AccountAction::class);
+    }
+
+    public function hasActiveActions(): bool
+    {
+        if (rand(0, 100) > 40) {
+            return $this->actions()->whereIsActive()->exists();
+        }
+
+        return $this->actions()->whereActive()->exists();
+    }
+}
+
+class AccountAction extends Model
+{
+    public function scopeWhereActive(Builder $query): Builder
+    {
+        return $query->where('is_active', true);
     }
 }
