@@ -129,3 +129,28 @@ class ModelWithScope extends Model
         return $query->where('foo', 'bar');
     }
 }
+
+class Account extends Model
+{
+    public function actions(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(AccountAction::class);
+    }
+
+    public function hasActiveActions(): bool
+    {
+        if (rand(0, 100) > 40) {
+            return $this->actions()->whereIsActive()->exists();
+        }
+
+        //return $this->actions()->whereActive()->exists();
+    }
+}
+
+class AccountAction extends Model
+{
+    public function scopeWhereActive(Builder $query): Builder
+    {
+        return $query->where('is_active', true);
+    }
+}
