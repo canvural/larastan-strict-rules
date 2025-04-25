@@ -49,6 +49,10 @@ final class NoGlobalLaravelFunctionRule implements Rule
             return [];
         }
 
+        if (! $this->provider->hasFunction($node->name, $scope)) {
+            return [];
+        }
+
         $functionReflection = $this->provider->getFunction($node->name, $scope);
 
         if (! $functionReflection instanceof PhpFunctionReflection) {

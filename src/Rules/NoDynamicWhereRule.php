@@ -96,6 +96,10 @@ final class NoDynamicWhereRule implements Rule
 
         $model = $this->findModel($calledOnReflection);
 
+        if ($model === Model::class) {
+            return [];
+        }
+
         if ($model !== null) {
             $eloquentBuilder = $this->builderHelper->determineBuilderName($model);
         } else {
