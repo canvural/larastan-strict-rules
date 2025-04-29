@@ -158,8 +158,22 @@ class Account extends Model
 
 class AccountAction extends Model
 {
+    /**
+     * @param Builder<AccountAction> $query
+     *
+     * @return Builder<AccountAction>
+     */
     public function scopeWhereActive(Builder $query): Builder
     {
         return $query->where('is_active', true);
+    }
+}
+
+/** @extends Builder<AccountAction> */
+class SomeBuilder extends Builder
+{
+    public function doFoo(): void
+    {
+        $this->whereActive();
     }
 }
