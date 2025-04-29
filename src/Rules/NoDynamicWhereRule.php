@@ -155,7 +155,17 @@ final class NoDynamicWhereRule implements Rule
             $calledOnReflection->getName() === EloquentBuilder::class ||
             $calledOnReflection->isSubclassOf(EloquentBuilder::class)
         ) {
-            $modelType = $calledOnReflection->getActiveTemplateTypeMap()->getType('TModelClass');
+            if ($calledOnReflection->isGeneric()) {
+                $modelType = $calledOnReflection->getActiveTemplateTypeMap()->getType('TModelClass') ??
+                    $calledOnReflection->getActiveTemplateTypeMap()->getType('TModel');
+            } elseif ($calledOnReflection->getParentClass() !== null) {
+                $parent = $calledOnReflection->getParentClass();
+
+                $modelType = $parent->getActiveTemplateTypeMap()->getType('TModelClass') ??
+                    $parent->getActiveTemplateTypeMap()->getType('TModel');
+            } else {
+                $modelType = null;
+            }
 
             if (! $modelType instanceof ObjectType) {
                 return null;
