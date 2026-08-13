@@ -137,7 +137,7 @@ class ListenerShouldHaveVoidReturnTypeRule implements Rule
         return $this->isRequest($parameters[0]);
     }
 
-    private function isRequest(ParameterReflection $parameter): bool
+    protected function isRequest(ParameterReflection $parameter): bool
     {
         $type = $parameter->getType();
 
@@ -148,7 +148,7 @@ class ListenerShouldHaveVoidReturnTypeRule implements Rule
         return (new ObjectType(SymfonyRequest::class))->isSuperTypeOf($type)->yes();
     }
 
-    private function isNextClosure(ParameterReflection $parameter): bool
+    protected function isNextClosure(ParameterReflection $parameter): bool
     {
         $type = $parameter->getType();
 
