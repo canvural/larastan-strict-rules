@@ -37,10 +37,9 @@ class ListenerShouldHaveVoidReturnTypeRuleTest extends RuleTestCase
                 23,
             ],
         ]);
-    }
 
-    public function testRuleDoesNotReportCommandAsFalsePositive(): void
-    {
+        $this->analyse([__DIR__ . '/data/Middlewares/FooMiddleware.php'], []);
+
         $this->analyse([__DIR__ . '/data/Commands/FooCommand.php'], []);
     }
 }
