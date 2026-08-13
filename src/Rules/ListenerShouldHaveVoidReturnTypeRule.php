@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Vural\LarastanStrictRules\Rules;
 
+use Illuminate\Console\Command;
 use PhpParser\Node;
 use PHPStan\Analyser\Scope;
 use PHPStan\File\FileHelper;
@@ -48,6 +49,11 @@ class ListenerShouldHaveVoidReturnTypeRule implements Rule
         $methodReflection = $scope->getFunction();
 
         if ($methodReflection === null) {
+            return [];
+        }
+
+        // Console commands also have a handle method, but they must return an exit code
+        if ($classReflection->is(Command::class)) {
             return [];
         }
 
