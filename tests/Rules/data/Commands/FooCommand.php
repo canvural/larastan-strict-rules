@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace data\Commands;
+namespace Commands;
 
 use Illuminate\Console\Command;
 
