@@ -6,6 +6,7 @@ on:
     branches:
       - "*.x" # run for release branches
   pull_request:
+  workflow_dispatch:
   schedule:
     - cron: "0 0 * * *"
 
