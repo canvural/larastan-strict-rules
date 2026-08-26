@@ -111,6 +111,8 @@ parameters:
         - app/DomainA/Listeners
 ```
 
+If `listenerPaths` is left empty, every class with a `handle` method is checked. Laravel commands and middlewares also use a `handle` method, but those are never reported by this rule.
+
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
