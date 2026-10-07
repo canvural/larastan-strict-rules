@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 use PhpParser\Node;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassMethodNode;
-use PHPStan\Reflection\Php\PhpParameterFromParserNodeReflection;
 use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
@@ -55,8 +54,8 @@ final class ScopeShouldReturnQueryBuilderRule implements Rule
         }
 
         if (
-            ! $classReflection->isSubclassOf(Model::class) &&
-            ! $classReflection->isSubclassOf(Builder::class)
+            ! $classReflection->is(Model::class) &&
+            ! $classReflection->is(Builder::class)
         ) {
             return [];
         }
@@ -65,7 +64,6 @@ final class ScopeShouldReturnQueryBuilderRule implements Rule
             return [];
         }
 
-        /** @var PhpParameterFromParserNodeReflection $firstParameter */
         $firstParameter = $methodReflection->getParameters()[0];
 
         $parameterClassNames = $firstParameter->getType()->getObjectClassNames();
@@ -74,7 +72,7 @@ final class ScopeShouldReturnQueryBuilderRule implements Rule
             return [];
         }
 
-        if ($parameterClassNames[0] !== Builder::class && ! $this->provider->getClass($parameterClassNames[0])->isSubclassOf(Builder::class)) {
+        if (! $this->provider->getClass($parameterClassNames[0])->is(Builder::class)) {
             return [];
         }
 
@@ -88,7 +86,7 @@ final class ScopeShouldReturnQueryBuilderRule implements Rule
             ];
         }
 
-        if ($returnTypeClassNames[0] !== Builder::class && ! $this->provider->getClass($returnTypeClassNames[0])->isSubclassOf(Builder::class)) {
+        if (! $this->provider->getClass($returnTypeClassNames[0])->is(Builder::class)) {
             return [
                 RuleErrorBuilder::message('Query scope should return query builder instance.')
                     ->identifier('larastanStrictRules.scopeShouldReturnQueryBuilderRule')

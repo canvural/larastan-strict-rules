@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 use PhpParser\Node;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassMethodNode;
-use PHPStan\Reflection\Php\PhpParameterFromParserNodeReflection;
 use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
@@ -58,7 +57,7 @@ final class NoLocalQueryScopeRule implements Rule
             return [];
         }
 
-        if (! $classReflection->isSubclassOf(Model::class)) {
+        if (! $classReflection->is(Model::class)) {
             return [];
         }
 
@@ -66,7 +65,6 @@ final class NoLocalQueryScopeRule implements Rule
             return [];
         }
 
-        /** @var PhpParameterFromParserNodeReflection $firstParameter */
         $firstParameter = $methodReflection->getParameters()[0];
 
         $parameterClassNames = $firstParameter->getType()->getObjectClassNames();
@@ -75,7 +73,7 @@ final class NoLocalQueryScopeRule implements Rule
             return [];
         }
 
-        if ($parameterClassNames[0] !== Builder::class && ! $this->provider->getClass($parameterClassNames[0])->isSubclassOf(Builder::class)) {
+        if (! $this->provider->getClass($parameterClassNames[0])->is(Builder::class)) {
             return [];
         }
 

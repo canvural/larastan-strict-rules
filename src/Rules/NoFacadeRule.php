@@ -48,7 +48,7 @@ final class NoFacadeRule implements Rule
         try {
             $class = $this->provider->getClass($className);
 
-            if ($class->isSubclassOf(Facade::class)) {
+            if ($class->getName() !== Facade::class && $class->is(Facade::class)) {
                 return [
                     RuleErrorBuilder::message(sprintf(
                         '%s facade should not be used.',

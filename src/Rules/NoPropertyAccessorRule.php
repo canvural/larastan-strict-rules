@@ -47,7 +47,7 @@ final class NoPropertyAccessorRule implements Rule
             return [];
         }
 
-        if (! $classReflection->isSubclassOf(Model::class)) {
+        if (! $classReflection->is(Model::class)) {
             return [];
         }
 
