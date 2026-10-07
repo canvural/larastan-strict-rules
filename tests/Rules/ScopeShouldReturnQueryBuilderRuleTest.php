@@ -42,6 +42,10 @@ class ScopeShouldReturnQueryBuilderRuleTest extends RuleTestCase
                 'Query scope should return query builder instance.',
                 36,
             ],
+            [
+                'Query scope should return query builder instance.',
+                55,
+            ],
         ]);
     }
 }

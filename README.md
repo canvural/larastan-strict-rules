@@ -87,11 +87,11 @@ This rule disallows validating the request in controllers.
 
 #### `ScopeShouldReturnQueryBuilderRule`
 
-This rule makes sure `Illuminate\Database\Eloquent\Builder` instance is returned from `Eloquent` local query scopes.
+This rule makes sure `Illuminate\Database\Eloquent\Builder` instance is returned from `Eloquent` local query scopes. Both `scope` prefixed methods and methods with the `#[Scope]` attribute are checked.
 
 #### `NoLocalQueryScopeRule`
 
-This rule disallows the usage of local model query scopes all together.
+This rule disallows the usage of local model query scopes all together. Both `scope` prefixed methods and methods with the `#[Scope]` attribute are reported.
 
 #### `NoPropertyAccessorRule`
 

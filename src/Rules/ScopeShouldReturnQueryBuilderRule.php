@@ -13,6 +13,7 @@ use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
+use Vural\LarastanStrictRules\Support\ScopeAttribute;
 
 use function count;
 use function str_starts_with;
@@ -42,7 +43,11 @@ final class ScopeShouldReturnQueryBuilderRule implements Rule
 
         $originalNode = $node->getOriginalNode();
 
-        if ($originalNode->stmts === null || ! str_starts_with($originalNode->name->name, 'scope')) {
+        if ($originalNode->stmts === null) {
+            return [];
+        }
+
+        if (! str_starts_with($originalNode->name->name, 'scope') && ! ScopeAttribute::isOn($node->getMethodReflection())) {
             return [];
         }
 
