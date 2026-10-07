@@ -14,6 +14,7 @@ use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\ShouldNotHappenException;
+use Vural\LarastanStrictRules\Support\ScopeAttribute;
 
 use function count;
 use function strpos;
@@ -46,7 +47,11 @@ final class NoLocalQueryScopeRule implements Rule
         $originalNode = $node->getOriginalNode();
         $methodName   = $originalNode->name->toString();
 
-        if ($originalNode->stmts === null || strpos($methodName, 'scope') !== 0 || ! $scope->isInClass()) {
+        if ($originalNode->stmts === null || ! $scope->isInClass()) {
+            return [];
+        }
+
+        if (strpos($methodName, 'scope') !== 0 && ! ScopeAttribute::isOn($node->getMethodReflection())) {
             return [];
         }
 

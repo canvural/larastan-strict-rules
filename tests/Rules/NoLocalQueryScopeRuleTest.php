@@ -28,6 +28,10 @@ class NoLocalQueryScopeRuleTest extends RuleTestCase
                 'Local query scopes should not be used.',
                 20,
             ],
+            [
+                'Local query scopes should not be used.',
+                33,
+            ],
         ]);
     }
 }

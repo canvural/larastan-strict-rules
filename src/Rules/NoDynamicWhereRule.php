@@ -24,6 +24,7 @@ use PHPStan\Type\ObjectType;
 use PHPStan\Type\ThisType;
 use PHPStan\Type\Type;
 use PHPStan\Type\TypeCombinator;
+use Vural\LarastanStrictRules\Support\ScopeAttribute;
 
 use function sprintf;
 use function str_starts_with;
@@ -109,6 +110,7 @@ final class NoDynamicWhereRule implements Rule
         if (
             $this->provider->getClass(Model::class)->hasNativeMethod($methodName) ||
             $model && $this->provider->getClass($model)->hasNativeMethod('scope' . ucfirst($methodName)) ||
+            $model && $this->hasScopeAttribute($model, $methodName) ||
             $this->provider->getClass($eloquentBuilder)->hasNativeMethod($methodName) ||
             $this->provider->getClass(QueryBuilder::class)->hasNativeMethod($methodName) ||
             $this->provider->getClass(BelongsToMany::class)->hasNativeMethod($methodName)
@@ -143,6 +145,14 @@ final class NoDynamicWhereRule implements Rule
         }
 
         return TypeCombinator::removeNull($calledOnType);
+    }
+
+    private function hasScopeAttribute(string $model, string $methodName): bool
+    {
+        $modelReflection = $this->provider->getClass($model);
+
+        return $modelReflection->hasNativeMethod($methodName) &&
+            ScopeAttribute::isOn($modelReflection->getNativeMethod($methodName));
     }
 
     private function findModel(ClassReflection $calledOnReflection): string|null

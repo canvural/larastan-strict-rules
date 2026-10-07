@@ -49,3 +49,30 @@ class Foo extends Model
         return $query->where('foo', 'bar');
     }
 }
+
+class WithScopeAttribute extends Model
+{
+    #[\Illuminate\Database\Eloquent\Attributes\Scope]
+    protected function popular(Builder $query): void
+    {
+        $query->where('votes', '>', 100);
+    }
+
+    #[\Illuminate\Database\Eloquent\Attributes\Scope]
+    protected function correct(Builder $query): Builder
+    {
+        return $query->where('foo', 'bar');
+    }
+
+    // Laravel does not treat private methods as scopes
+    #[\Illuminate\Database\Eloquent\Attributes\Scope]
+    private function privateMethod(Builder $query): void
+    {
+        $query->where('foo', 'bar');
+    }
+
+    protected function withoutAttribute(Builder $query): void
+    {
+        $query->where('foo', 'bar');
+    }
+}

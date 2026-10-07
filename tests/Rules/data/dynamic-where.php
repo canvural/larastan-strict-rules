@@ -182,3 +182,73 @@ function calledOnBaseModel(Model $model)
 {
     $model->whereFoo();
 }
+
+class ModelWithScopeAttribute extends Model
+{
+    #[\Illuminate\Database\Eloquent\Attributes\Scope]
+    protected function whereActive(Builder $query): void
+    {
+        $query->where('is_active', true);
+    }
+
+    // Laravel does not treat private methods as scopes
+    #[\Illuminate\Database\Eloquent\Attributes\Scope]
+    private function wherePrivate(Builder $query): void
+    {
+        $query->where('is_private', true);
+    }
+
+    protected function whereWithoutAttribute(Builder $query): void
+    {
+        $query->where('foo', 'bar');
+    }
+}
+
+class ModelRelatedToScopeAttribute extends Model
+{
+    /** @return \Illuminate\Database\Eloquent\Relations\HasMany<ModelWithScopeAttribute, $this> */
+    public function related(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(ModelWithScopeAttribute::class);
+    }
+
+    public function doFoo(): void
+    {
+        ModelWithScopeAttribute::query()->whereActive();
+        $this->related()->whereActive();
+    }
+}
+
+/** @extends Builder<ModelWithScopeAttribute> */
+class ScopeAttributeBuilder extends Builder
+{
+    public function doFoo(): void
+    {
+        $this->whereActive();
+        $this->wherePrivate();
+        $this->whereWithoutAttribute();
+    }
+}
+
+trait HasScopeAttribute
+{
+    #[\Illuminate\Database\Eloquent\Attributes\Scope]
+    protected function whereFromTrait(Builder $query): void
+    {
+        $query->where('foo', 'bar');
+    }
+}
+
+class ModelWithScopeAttributeFromTrait extends Model
+{
+    use HasScopeAttribute;
+}
+
+/** @extends Builder<ModelWithScopeAttributeFromTrait> */
+class ScopeAttributeFromTraitBuilder extends Builder
+{
+    public function doFoo(): void
+    {
+        $this->whereFromTrait();
+    }
+}
