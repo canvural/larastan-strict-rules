@@ -48,7 +48,7 @@ final class NoValidationInControllerRule implements Rule
 
         $classReflection = $scope->getClassReflection();
 
-        if (! $classReflection->isSubclassOf(Controller::class)) {
+        if (! $classReflection->is(Controller::class)) {
             return [];
         }
 

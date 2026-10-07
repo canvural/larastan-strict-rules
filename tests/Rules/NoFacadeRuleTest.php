@@ -22,11 +22,11 @@ class NoFacadeRuleTest extends RuleTestCase
         $this->analyse([__DIR__ . '/data/facades.php'], [
             [
                 'Illuminate\Support\Facades\Queue facade should not be used.',
-                10,
+                11,
             ],
             [
                 'RateLimiter facade should not be used.',
-                12,
+                13,
             ],
         ]);
     }

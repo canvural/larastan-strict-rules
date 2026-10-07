@@ -48,6 +48,10 @@ class NoDynamicWhereRuleTest extends RuleTestCase
                 "Dynamic where method 'whereIsActive' should not be used.",
                 152,
             ],
+            [
+                "Dynamic where method 'whereFoo' should not be used.",
+                183,
+            ],
         ]);
     }
 }

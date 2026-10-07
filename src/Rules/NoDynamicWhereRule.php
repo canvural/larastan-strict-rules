@@ -147,14 +147,11 @@ final class NoDynamicWhereRule implements Rule
 
     private function findModel(ClassReflection $calledOnReflection): string|null
     {
-        if ($calledOnReflection->isSubclassOf(Model::class)) {
+        if ($calledOnReflection->getName() !== Model::class && $calledOnReflection->is(Model::class)) {
             return $calledOnReflection->getName();
         }
 
-        if (
-            $calledOnReflection->getName() === EloquentBuilder::class ||
-            $calledOnReflection->isSubclassOf(EloquentBuilder::class)
-        ) {
+        if ($calledOnReflection->is(EloquentBuilder::class)) {
             if ($calledOnReflection->isGeneric()) {
                 $modelType = $calledOnReflection->getActiveTemplateTypeMap()->getType('TModelClass') ??
                     $calledOnReflection->getActiveTemplateTypeMap()->getType('TModel');
@@ -174,10 +171,7 @@ final class NoDynamicWhereRule implements Rule
             return $modelType->getClassName();
         }
 
-        if (
-            $calledOnReflection->getName() === Relation::class ||
-            $calledOnReflection->isSubclassOf(Relation::class)
-        ) {
+        if ($calledOnReflection->is(Relation::class)) {
             $modelType = $calledOnReflection->getActiveTemplateTypeMap()->getType('TRelatedModel');
 
             if (! $modelType instanceof ObjectType) {

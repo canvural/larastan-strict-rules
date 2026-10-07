@@ -7,7 +7,6 @@ namespace Vural\LarastanStrictRules\Rules;
 use PhpParser\Node;
 use PhpParser\Node\Expr\FuncCall;
 use PHPStan\Analyser\Scope;
-use PHPStan\Reflection\Php\PhpFunctionReflection;
 use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
@@ -54,10 +53,6 @@ final class NoGlobalLaravelFunctionRule implements Rule
         }
 
         $functionReflection = $this->provider->getFunction($node->name, $scope);
-
-        if (! $functionReflection instanceof PhpFunctionReflection) {
-            return [];
-        }
 
         $fileName = $functionReflection->getFileName();
 

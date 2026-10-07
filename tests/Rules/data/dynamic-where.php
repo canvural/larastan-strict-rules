@@ -177,3 +177,8 @@ class SomeBuilder extends Builder
         $this->whereActive();
     }
 }
+
+function calledOnBaseModel(Model $model)
+{
+    $model->whereFoo();
+}
